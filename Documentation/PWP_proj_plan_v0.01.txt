@@ -1,0 +1,40 @@
+Auth [register, login, logout]
+	APIs:
+		/register	GET	(info about required reg data)
+		/register	PUT	(registration action, checks if uname is unique & password matches the required pattern)
+		/login		GET	(info about required login data)
+		/login		POST	(login action, checks uname against password)
+		/logout		POST	(logout action, returns error if no user is logged in)
+Profile [basic info, movie preferences, genre preferences, delete account(*)]
+	APIs:
+		/profile/{id} 				GET	("display" profile)
+		/profile/edit [expand this to steps]	GET 	(show editable profile info)
+		/profile/update [same steps as above]	POST	(update editable prof info)
+		/profile/delete				GET	(prompt, receive delete token)
+		/profile/destroy 			DELETE	(actual delete, token is necessary param.)
+Suggestions [based on: profile and N parameters (search text, selected genre)]
+	APIs:
+		/search[?title=""&genre=""]	GET	(this is where the magic happens!)
+Content CRUD -> immediate effect on Suggestions
+	APIs:
+		/movie/{id}				GET	("display" movie)
+		/movie/create	[expand this to steps]	GET	(info about upload movie requirements)
+		/movie/store	[same steps as above]	PUT	(creating new content)
+		/movie/edit	[same steps as above]	GET	(info about editing movie requirements)
+		/movie/update	[same steps as above]	POST	(updating content)
+		/movie/delete				GET	(prompt, receive delete token)
+		/movie/destroy				DELETE	(deletes the content - soft delete)
+Content rating
+	APIs:
+		/rating/{movie_id}	GET (get the mean rating, the number of those who rated and if the user is logged in, his/her rating)
+		/rate			POST (rate the movie, rating)
+Content comments
+	APIs:
+		/comments/{movie_id}		GET (display existing comments)
+		/comments/{movie_id}/store	PUT (comment on a movie)
+		/comments/{comment_id}/destroy	DELETE
+Friendship/Following (*)
+	APIs:
+		/friends		GET	(show friends list)
+		/friends/request	PUT	(create a friend req, profile_id required param)
+		/friends/respond	POST	(respond to a friend request, ACCEPT or DECLINE)
