@@ -16,10 +16,10 @@ class CreateFriendsTable extends Migration
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
 
-            $table->string('status')->default(\App\Friend::NEW_STATE);
+            $table->enum('status', \App\Friend::STATES)->default(\App\Friend::NEW_STATE);
 
-            $table->unsignedBigInteger('requester'); // user_id
-            $table->unsignedBigInteger('requested'); // user_id
+            $table->unsignedBigInteger('requester');
+            $table->unsignedBigInteger('requested');
         });
 
         Schema::table('friends', function (Blueprint $table) {
