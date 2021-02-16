@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateContentGenresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('content_genres', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('content_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('text');
 
-            $table->timestamps();
+            $table->unsignedBigInteger('content_id');
+            $table->unsignedBigInteger('genre_id');
         });
 
-        Schema::table('comments', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('content_genres', function (Blueprint $table) {
             $table->foreign('content_id')->references('id')->on('contents');
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 
@@ -35,6 +33,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('content_genres');
     }
 }

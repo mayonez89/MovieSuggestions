@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFriendsTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateFriendsTable extends Migration
      */
     public function up()
     {
-        Schema::create('friends', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('requester'); // user_id
-            $table->unsignedInteger('requested'); // user_id
-            $table->string('status')->default(\App\Friend::NEW_STATE);
 
-            $table->timestamps();
+            $table->string('name');
+            $table->string('code'); // country code
+
+//            $table->timestamps();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateFriendsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('friends');
+        Schema::dropIfExists('countries');
     }
 }

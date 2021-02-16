@@ -4,7 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rating extends Model
+class Likes extends Model
 {
     protected $guarded = [];
+
+    public $timestamps = false;
 }

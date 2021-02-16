@@ -15,10 +15,15 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
             $table->string('title');
+            $table->string('trailer_url')->nullable();
             $table->string('description')->nullable();
-            $table->unsignedInteger('owner_id'); // user_id
+            $table->string('director')->nullable();
+            $table->string('release_date')->nullable();
+
+//            if we allow users to create content
+//            $table->unsignedInteger('owner_id'); // user_id
+//            $table->foreign('owner_id')->references('id')->on('users');
 
             $table->softDeletes();
             $table->timestamps();

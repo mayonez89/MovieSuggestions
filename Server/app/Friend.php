@@ -19,4 +19,6 @@ class Friend extends Model
     // states
 
     protected $guarded = [];
+
+    public $timestamps = false;
 }
