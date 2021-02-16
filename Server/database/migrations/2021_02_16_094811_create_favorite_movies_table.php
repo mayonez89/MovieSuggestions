@@ -14,15 +14,13 @@ class CreateFavoriteMoviesTable extends Migration
     public function up()
     {
         Schema::create('favorite_movies', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('content_id');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->string('content_id')->index();
         });
 
         Schema::table('favorite_movies', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('content_id')->references('id')->on('contents');
+            $table->foreign('content_id')->references('slug')->on('contents');
         });
     }
 

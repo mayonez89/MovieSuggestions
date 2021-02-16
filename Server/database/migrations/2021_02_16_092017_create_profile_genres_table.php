@@ -14,10 +14,8 @@ class CreateProfileGenresTable extends Migration
     public function up()
     {
         Schema::create('profile_genres', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('profile_id');
-            $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('profile_id')->index();
+            $table->unsignedBigInteger('genre_id')->index();
         });
 
         Schema::table('profile_genres', function (Blueprint $table) {

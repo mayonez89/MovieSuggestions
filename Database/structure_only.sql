@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `comments`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comments` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `content_id` bigint unsigned NOT NULL,
-  `user_id` bigint unsigned NOT NULL,
   `text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `comments_user_id_foreign` (`user_id`),
   KEY `comments_content_id_foreign` (`content_id`),
-  CONSTRAINT `comments_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
+  CONSTRAINT `comments_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,13 +45,11 @@ DROP TABLE IF EXISTS `content_genres`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `content_genres` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `content_id` bigint unsigned NOT NULL,
+  `content_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `genre_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `content_genres_content_id_foreign` (`content_id`),
-  KEY `content_genres_genre_id_foreign` (`genre_id`),
-  CONSTRAINT `content_genres_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
+  KEY `content_genres_content_id_index` (`content_id`),
+  KEY `content_genres_genre_id_index` (`genre_id`),
+  CONSTRAINT `content_genres_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `content_genres_genre_id_foreign` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -64,7 +62,7 @@ DROP TABLE IF EXISTS `contents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contents` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `trailer_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -73,7 +71,7 @@ CREATE TABLE `contents` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  KEY `contents_slug_index` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,10 +83,9 @@ DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `countries` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `countries_code_index` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,13 +97,11 @@ DROP TABLE IF EXISTS `favorite_movies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite_movies` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint unsigned NOT NULL,
-  `content_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `favorite_movies_user_id_foreign` (`user_id`),
-  KEY `favorite_movies_content_id_foreign` (`content_id`),
-  CONSTRAINT `favorite_movies_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
+  `content_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `favorite_movies_user_id_index` (`user_id`),
+  KEY `favorite_movies_content_id_index` (`content_id`),
+  CONSTRAINT `favorite_movies_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `favorite_movies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -120,7 +115,7 @@ DROP TABLE IF EXISTS `friends`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `friends` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
+  `status` enum('new','accepted','rejected','blocked') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
   `requester` bigint unsigned NOT NULL,
   `requested` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -153,30 +148,13 @@ DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint unsigned NOT NULL,
   `comment_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `likes_user_id_foreign` (`user_id`),
-  KEY `likes_comment_id_foreign` (`comment_id`),
+  KEY `likes_user_id_index` (`user_id`),
+  KEY `likes_comment_id_index` (`comment_id`),
   CONSTRAINT `likes_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`),
   CONSTRAINT `likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `migrations` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,12 +165,10 @@ DROP TABLE IF EXISTS `profile_genres`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profile_genres` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `profile_id` bigint unsigned NOT NULL,
   `genre_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `profile_genres_profile_id_foreign` (`profile_id`),
-  KEY `profile_genres_genre_id_foreign` (`genre_id`),
+  KEY `profile_genres_profile_id_index` (`profile_id`),
+  KEY `profile_genres_genre_id_index` (`genre_id`),
   CONSTRAINT `profile_genres_genre_id_foreign` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`),
   CONSTRAINT `profile_genres_profile_id_foreign` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -210,14 +186,12 @@ CREATE TABLE `profiles` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int DEFAULT NULL,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country_id` bigint unsigned DEFAULT NULL,
-  `user_id` bigint unsigned NOT NULL,
+  `country_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `profiles_user_id_foreign` (`user_id`),
   KEY `profiles_country_id_foreign` (`country_id`),
-  CONSTRAINT `profiles_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`),
-  CONSTRAINT `profiles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `profiles_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`code`),
+  CONSTRAINT `profiles_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,12 +205,12 @@ DROP TABLE IF EXISTS `ratings`;
 CREATE TABLE `ratings` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `value` int unsigned NOT NULL,
-  `content_id` bigint unsigned NOT NULL,
+  `content_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ratings_user_id_foreign` (`user_id`),
   KEY `ratings_content_id_foreign` (`content_id`),
-  CONSTRAINT `ratings_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`id`),
+  CONSTRAINT `ratings_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `ratings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -269,4 +243,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-16 14:19:15
+-- Dump completed on 2021-02-16 16:44:44

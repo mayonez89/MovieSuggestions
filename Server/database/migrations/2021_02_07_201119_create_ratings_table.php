@@ -18,13 +18,13 @@ class CreateRatingsTable extends Migration
 
             $table->unsignedInteger('value');
 
-            $table->unsignedBigInteger('content_id');
+            $table->string('content_id');
             $table->unsignedBigInteger('user_id');
         });
 
         Schema::table('ratings', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('content_id')->references('id')->on('contents');
+            $table->foreign('content_id')->references('slug')->on('contents');
         });
     }
 
