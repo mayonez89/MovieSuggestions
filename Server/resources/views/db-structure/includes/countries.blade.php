@@ -7,6 +7,7 @@
         <TH>Key</TH>
         <TH>Default</TH>
         <TH>Extra</TH>
+        <TH>Description</TH>
     </TR>
     <TR>
         <TD>code</TD>
@@ -15,6 +16,7 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Short code for country</TD>
     </TR>
     <TR>
         <TD>name</TD>
@@ -23,5 +25,6 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Name of country</TD>
     </TR>
 </TABLE>

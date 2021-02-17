@@ -7,6 +7,7 @@
         <TH>Key</TH>
         <TH>Default</TH>
         <TH>Extra</TH>
+        <TH>Description</TH>
     </TR>
     <TR>
         <TD>id</TD>
@@ -15,6 +16,7 @@
         <TD>PRI</TD>
         <TD>NULL</TD>
         <TD>auto_increment</TD>
+        <TD>Unique Id of entry</TD>
     </TR>
     <TR>
         <TD>value</TD>
@@ -23,6 +25,7 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Rating</TD>
     </TR>
     <TR>
         <TD>content_id</TD>
@@ -31,6 +34,7 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Id of a movie that has been rated </TD>
     </TR>
     <TR>
         <TD>user_id</TD>
@@ -39,5 +43,6 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>User that has given rating</TD>
     </TR>
 </TABLE>

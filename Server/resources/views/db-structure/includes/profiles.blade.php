@@ -7,6 +7,7 @@
         <TH>Key</TH>
         <TH>Default</TH>
         <TH>Extra</TH>
+        <TH>Description</TH>
     </TR>
     <TR>
         <TD>id</TD>
@@ -15,6 +16,7 @@
         <TD>PRI</TD>
         <TD>NULL</TD>
         <TD>auto_increment</TD>
+        <TD>Unique Id of user profile</TD>
     </TR>
     <TR>
         <TD>name</TD>
@@ -23,6 +25,7 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Name of user</TD>
     </TR>
     <TR>
         <TD>age</TD>
@@ -31,6 +34,7 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Age of user</TD>
     </TR>
     <TR>
         <TD>gender</TD>
@@ -39,6 +43,7 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Gender of user</TD>
     </TR>
     <TR>
         <TD>country_id</TD>
@@ -47,6 +52,7 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Id of country he/she resides</TD>
     </TR>
     <TR>
         <TD>deleted_at</TD>
@@ -55,5 +61,6 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Profile deleted time </TD>
     </TR>
 </TABLE>

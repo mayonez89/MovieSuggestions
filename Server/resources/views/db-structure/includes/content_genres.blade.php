@@ -7,6 +7,7 @@
         <TH>Key</TH>
         <TH>Default</TH>
         <TH>Extra</TH>
+        <TH>Description</TH>
     </TR>
     <TR>
         <TD>content_id</TD>
@@ -15,6 +16,7 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Id of movies/content</TD>
     </TR>
     <TR>
         <TD>genre_id</TD>
@@ -23,5 +25,6 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Id of movie genre</TD>
     </TR>
 </TABLE>

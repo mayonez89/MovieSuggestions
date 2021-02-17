@@ -7,6 +7,7 @@
         <TH>Key</TH>
         <TH>Default</TH>
         <TH>Extra</TH>
+        <TH>Description</TH>
     </TR>
     <TR>
         <TD>id</TD>
@@ -15,6 +16,7 @@
         <TD>PRI</TD>
         <TD>NULL</TD>
         <TD>auto_increment</TD>
+        <TD>Unique Id for each entry</TD>
     </TR>
     <TR>
         <TD>name</TD>
@@ -23,5 +25,6 @@
         <TD></TD>
         <TD>NULL</TD>
         <TD></TD>
+        <TD>Genre name</TD>
     </TR>
 </TABLE>
