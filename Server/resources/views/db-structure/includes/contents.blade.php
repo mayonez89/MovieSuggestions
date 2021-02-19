@@ -16,7 +16,7 @@
         <TD>MUL</TD>
         <TD>NULL</TD>
         <TD></TD>
-        <TD>Slug</TD>
+        <TD>Id in a string form</TD>
     </TR>
     <TR>
         <TD>title</TD>
