@@ -29,9 +29,27 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    public function comments()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Content::class,'favorite_movies', 'user_id', 'content_id');
+    }
+
+    public function friendships($states = [Friend::ACCEPTED_STATE])
+    {
+        $self_started = $this->hasMany(Friend::class, 'requester', 'user_id');
+        $got_invited = $this->hasMany(Friend::class, 'requested', 'user_id');
+
+        if(is_array($states) && !empty($states))
+        {
+            $self_started = $self_started->whereIn('status', $states);
+            $got_invited = $got_invited->whereIn('status', $states);
+        }
+
+        return $self_started->get()->merge($got_invited->get())->all();
+    }
 }
