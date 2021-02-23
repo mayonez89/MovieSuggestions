@@ -39,7 +39,7 @@ Upon any edition to this file the server needs to be restarted to take effect. *
 
  - within the command line, navigate to the 
 [Server folder](https://github.com/mayonez89/MovieSuggestions/blob/main/Server)
- - Run command: <code>php artisan migrate --seed</code>
+ - Run command: <code>php artisan migrate:fresh --seed</code>
  
 ## 5) Run the server
 

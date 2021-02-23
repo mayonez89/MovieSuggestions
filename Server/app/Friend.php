@@ -20,6 +20,16 @@ class Friend extends Model
     ];
     // states
 
+    // types
+    CONST REQUESTER_TYPE = 'requester';
+    CONST REQUESTED_TYPE  = 'requested';
+
+    CONST TYPES = [
+        self::REQUESTED_TYPE,
+        self::REQUESTER_TYPE,
+    ];
+    // types
+
     protected $guarded = [];
 
     public $timestamps = false;
