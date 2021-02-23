@@ -40,7 +40,10 @@ Upon any edition to this file the server needs to be restarted to take effect. *
  - within the command line, navigate to the 
 [Server folder](https://github.com/mayonez89/MovieSuggestions/blob/main/Server)
  - Run command: <code>php artisan migrate:fresh --seed</code>
- 
+ - Navigate to root of the project and locate `db-dump.sql` inside `Database` folder.
+ - To populate the database login to mysql
+ - run `use whatever_is_your_db`
+ - run `source path_of_db-dump.sql`
 ## 5) Run the server
 
 - within the command line, navigate to the 
