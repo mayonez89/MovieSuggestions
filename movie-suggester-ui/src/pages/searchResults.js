@@ -5,7 +5,7 @@ import Placeholders from '../components/placeholder';
 
 import '../style/utils.css'
 
-export default class Home extends React.Component {
+export default class SearchResults extends React.Component {
     constructor(props) {
         super(props);      
       }
@@ -15,14 +15,7 @@ export default class Home extends React.Component {
       return (
         <>
        <NavBar/>
-
-       <Container  textAlign='center' className="p20" >
-          <Input icon='search' fluid focus placeholder='Search...' />
-       </Container>
-
-       <Container  textAlign='center' className="p50"  >
-         <p>Our recommendations</p>
-       </Container>
+ 
 
         <Placeholders/>
        
