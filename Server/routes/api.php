@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,41 +14,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* auth */
-Route::get('register', 'RegisterController@register')->name('register');
-Route::post('register', 'RegisterController@registerAction')->name('registerAction');
-
-Route::get('login', 'LoginController@login')->name('login');
-Route::post('login', 'LoginController@loginAction')->name('loginAction');
-
-Route::post('logout', 'LoginController@logoutAction')->name('logoutAction');
+Route::post('register', 'RegisterController@register')->name('register');
+Route::post('login', 'LoginController@login')->name('login');
+Route::post('logout', 'LoginController@logout')->name('logout');
 /* auth */
 
 /* profile */
-Route::get('profile/delete', 'ProfileController@delete')->name('deleteProfile');
-Route::resource('profile','ProfileController')->except(['index']);
+Route::resource('profiles','ProfileController')->except(['create', 'edit','index',]);
 /* profile */
 
 /* content */
-Route::resource('content', 'ContentController')->except(['index']);
+Route::resource('contents', 'ContentController')->except(['create', 'edit',]);
 /* content */
 
 /* search */
 Route::get('search', 'SearchController@search')->name('search');
-Route::get('search-action', 'SearchController@searchAction')->name('search-action');
 /* search */
 
 /* rating */
-Route::get('rating/{content}', "RatingController@rating")->name('rating');
-Route::post('rate/{content}', "RatingController@rate")->name('rate');
+Route::resource('contents.ratings', 'RatingController')->only(['index', 'store', 'update',]);
 /* rating */
 
 /* comments */
-Route::get('comment/{content}', "CommentController@index")->name('comments');
-Route::post('comment/{content}', 'CommentController@store')->name('comment.store');
+Route::resource('contents.genres', "GenreController")->except(['create', 'edit',]);
 /* comments */
 
+Route::resource('profiles.favorites', 'FavoritesController')->except(['create', 'edit', 'show', 'update',]);
+
 /* friends */
-Route::resource('friends', 'FriendController');
+//Route::resource('friends', 'FriendController');
 /* friends */
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {

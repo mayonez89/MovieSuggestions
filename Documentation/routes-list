@@ -1,37 +1,29 @@
-+--------+-----------+----------------------------+-----------------+--------------------------------------------------------+------------+
-| Domain | Method    | URI                        | Name            | Action                                                 | Middleware |
-+--------+-----------+----------------------------+-----------------+--------------------------------------------------------+------------+
-|        | GET|HEAD  | /                          |                 | Closure                                                | web        |
-|        | POST      | api/comment/{content}      | comment.store   | App\Http\Controllers\CommentController@store           | api        |
-|        | GET|HEAD  | api/comment/{content}      | comments        | App\Http\Controllers\CommentController@index           | api        |
-|        | POST      | api/content                | content.store   | App\Http\Controllers\ContentController@store           | api        |
-|        | GET|HEAD  | api/content/create         | content.create  | App\Http\Controllers\ContentController@create          | api        |
-|        | DELETE    | api/content/{content}      | content.destroy | App\Http\Controllers\ContentController@destroy         | api        |
-|        | GET|HEAD  | api/content/{content}      | content.show    | App\Http\Controllers\ContentController@show            | api        |
-|        | PUT|PATCH | api/content/{content}      | content.update  | App\Http\Controllers\ContentController@update          | api        |
-|        | GET|HEAD  | api/content/{content}/edit | content.edit    | App\Http\Controllers\ContentController@edit            | api        |
-|        | POST      | api/friends                | friends.store   | App\Http\Controllers\FriendController@store            | api        |
-|        | GET|HEAD  | api/friends                | friends.index   | App\Http\Controllers\FriendController@index            | api        |
-|        | GET|HEAD  | api/friends/create         | friends.create  | App\Http\Controllers\FriendController@create           | api        |
-|        | PUT|PATCH | api/friends/{friend}       | friends.update  | App\Http\Controllers\FriendController@update           | api        |
-|        | DELETE    | api/friends/{friend}       | friends.destroy | App\Http\Controllers\FriendController@destroy          | api        |
-|        | GET|HEAD  | api/friends/{friend}       | friends.show    | App\Http\Controllers\FriendController@show             | api        |
-|        | GET|HEAD  | api/friends/{friend}/edit  | friends.edit    | App\Http\Controllers\FriendController@edit             | api        |
-|        | GET|HEAD  | api/login                  | login           | App\Http\Controllers\LoginController@login             | api        |
-|        | POST      | api/login                  | loginAction     | App\Http\Controllers\LoginController@loginAction       | api        |
-|        | POST      | api/logout                 | logoutAction    | App\Http\Controllers\LoginController@logoutAction      | api        |
-|        | POST      | api/profile                | profile.store   | App\Http\Controllers\ProfileController@store           | api        |
-|        | GET|HEAD  | api/profile/create         | profile.create  | App\Http\Controllers\ProfileController@create          | api        |
-|        | GET|HEAD  | api/profile/delete         | deleteProfile   | App\Http\Controllers\ProfileController@delete          | api        |
-|        | DELETE    | api/profile/{profile}      | profile.destroy | App\Http\Controllers\ProfileController@destroy         | api        |
-|        | PUT|PATCH | api/profile/{profile}      | profile.update  | App\Http\Controllers\ProfileController@update          | api        |
-|        | GET|HEAD  | api/profile/{profile}      | profile.show    | App\Http\Controllers\ProfileController@show            | api        |
-|        | GET|HEAD  | api/profile/{profile}/edit | profile.edit    | App\Http\Controllers\ProfileController@edit            | api        |
-|        | POST      | api/rate/{content}         | rate            | App\Http\Controllers\RatingController@rate             | api        |
-|        | GET|HEAD  | api/rating/{content}       | rating          | App\Http\Controllers\RatingController@rating           | api        |
-|        | POST      | api/register               | registerAction  | App\Http\Controllers\RegisterController@registerAction | api        |
-|        | GET|HEAD  | api/register               | register        | App\Http\Controllers\RegisterController@register       | api        |
-|        | GET|HEAD  | api/search                 | search          | App\Http\Controllers\SearchController@search           | api        |
-|        | GET|HEAD  | api/search-action          | search-action   | App\Http\Controllers\SearchController@searchAction     | api        |
-+--------+-----------+----------------------------+-----------------+--------------------------------------------------------+------------+
++-----------+---------------------------------------------+--------------------------------------------------+
+| Method    | URI                                         | Action                                           |
++-----------+---------------------------------------------+--------------------------------------------------+
+| GET|HEAD  | api/contents                                | App\Http\Controllers\ContentController@index     |
+| POST      | api/contents                                | App\Http\Controllers\ContentController@store     |
+| DELETE    | api/contents/{content}                      | App\Http\Controllers\ContentController@destroy   |
+| PUT|PATCH | api/contents/{content}                      | App\Http\Controllers\ContentController@update    |
+| GET|HEAD  | api/contents/{content}                      | App\Http\Controllers\ContentController@show      |
+| POST      | api/contents/{content}/genres               | App\Http\Controllers\GenreController@store       |
+| GET|HEAD  | api/contents/{content}/genres               | App\Http\Controllers\GenreController@index       |
+| DELETE    | api/contents/{content}/genres/{genre}       | App\Http\Controllers\GenreController@destroy     |
+| PUT|PATCH | api/contents/{content}/genres/{genre}       | App\Http\Controllers\GenreController@update      |
+| GET|HEAD  | api/contents/{content}/genres/{genre}       | App\Http\Controllers\GenreController@show        |
+| GET|HEAD  | api/contents/{content}/ratings              | App\Http\Controllers\RatingController@index      |
+| POST      | api/contents/{content}/ratings              | App\Http\Controllers\RatingController@store      |
+| PUT|PATCH | api/contents/{content}/ratings/{rating}     | App\Http\Controllers\RatingController@update     |
+| POST      | api/login                                   | App\Http\Controllers\LoginController@login       |
+| POST      | api/logout                                  | App\Http\Controllers\LoginController@logout      |
+| POST      | api/profiles                                | App\Http\Controllers\ProfileController@store     |
+| PUT|PATCH | api/profiles/{profile}                      | App\Http\Controllers\ProfileController@update    |
+| DELETE    | api/profiles/{profile}                      | App\Http\Controllers\ProfileController@destroy   |
+| GET|HEAD  | api/profiles/{profile}                      | App\Http\Controllers\ProfileController@show      |
+| GET|HEAD  | api/profiles/{profile}/favorites            | App\Http\Controllers\FavoritesController@index   |
+| POST      | api/profiles/{profile}/favorites            | App\Http\Controllers\FavoritesController@store   |
+| DELETE    | api/profiles/{profile}/favorites/{favorite} | App\Http\Controllers\FavoritesController@destroy |
+| POST      | api/register                                | App\Http\Controllers\RegisterController@register |
+| GET|HEAD  | api/search                                  | App\Http\Controllers\SearchController@search     |
++-----------+---------------------------------------------+--------------------------------------------------+
 
