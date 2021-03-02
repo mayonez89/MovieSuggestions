@@ -34,7 +34,7 @@ CREATE TABLE `comments` (
   KEY `comments_content_id_foreign` (`content_id`),
   CONSTRAINT `comments_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'mind blowing movie','inception',1,NULL,NULL),(2,'nice','end-game',2,NULL,NULL);
+INSERT INTO `comments` VALUES (1,'mind blowing movie','inception',1,NULL,NULL),(2,'nice','end-game',2,NULL,NULL),(3,'joker is best','the-dark-knight',2,NULL,NULL),(4,'amazing movie','12-angry-men ',3,NULL,NULL);
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `content_genres` (
 
 LOCK TABLES `content_genres` WRITE;
 /*!40000 ALTER TABLE `content_genres` DISABLE KEYS */;
-INSERT INTO `content_genres` VALUES ('infinity-war',1),('end-game',1),('inception',13);
+INSERT INTO `content_genres` VALUES ('infinity-war',1),('end-game',1),('inception',13),('the-shawshank-redemption',5),('the-godfather ',4),('the-dark-knight',1),('12-angry-men ',4),('forrest -gump',5),('the-matrix',1),('Interstellar',13);
 /*!40000 ALTER TABLE `content_genres` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `contents` (
 
 LOCK TABLES `contents` WRITE;
 /*!40000 ALTER TABLE `contents` DISABLE KEYS */;
-INSERT INTO `contents` VALUES ('infinity-war','Avengers: Infinity War','https://www.youtube.com/watch?v=6ZfuNTqbHE8','The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.','Anthony Russo','2018',NULL,NULL,NULL),('end-game','Avengers: Endgame ','https://www.youtube.com/watch?v=TcMBFSGVi1c','After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe','Anthony Russo','2019',NULL,NULL,NULL),('inception','inception','https://www.youtube.com/watch?v=YoHD9XEInc0','A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',' Christopher Nolan','2010',NULL,NULL,NULL);
+INSERT INTO `contents` VALUES ('infinity-war','Avengers: Infinity War','https://www.youtube.com/watch?v=6ZfuNTqbHE8','The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.','Anthony Russo','2018',NULL,NULL,NULL),('end-game','Avengers: Endgame ','https://www.youtube.com/watch?v=TcMBFSGVi1c','After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe','Anthony Russo','2019',NULL,NULL,NULL),('inception','inception','https://www.youtube.com/watch?v=YoHD9XEInc0','A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',' Christopher Nolan','2010',NULL,NULL,NULL),('the-shawshank-redemption','The shawshank redemption','https://www.youtube.com/watch?v=NmzuHjWmXOc','Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.','Frank Darabont','1994',NULL,NULL,NULL),('the-godfather ','The Godfather ','https://www.imdb.com/video/vi1348706585?playlistId=tt0068646&ref_=tt_ov_vi','An organized crime dynasty\'s aging patriarch transfers control of his clandestine empire to his reluctant son.','Francis Ford Coppola','1972',NULL,NULL,NULL),('the-dark-knight','The Dark Knight','https://www.imdb.com/video/vi324468761?playlistId=tt0468569&ref_=tt_ov_vi','When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',' Christopher Nolan','2008',NULL,NULL,NULL),('12-angry-men ','12 Angry Men ','https://www.imdb.com/video/vi3452609817?playlistId=tt0050083&ref_=tt_ov_vi','A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.','Sidney Lumet','1957',NULL,NULL,NULL),('forrest -gump','Forrest Gump','https://www.imdb.com/video/vi3567517977?playlistId=tt0109830&ref_=tt_ov_vi','The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate and other historical events unfold through the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.','Robert Zemeckis','1994',NULL,NULL,NULL),('the-matrix','The Matrix','https://imdb.com/video/vi1032782617?playlistId=tt0133093&ref_=tt_ov_vi','When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.',' Lana Wachowski ','1999',NULL,NULL,NULL),('Interstellar','Interstellar','https://www.imdb.com/video/vi1586278169?playlistId=tt0816692&ref_=tt_ov_vi','A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.','Christopher Nolan','2014',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `contents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `friends` (
   KEY `friends_requested_foreign` (`requested`),
   CONSTRAINT `friends_requested_foreign` FOREIGN KEY (`requested`) REFERENCES `users` (`id`),
   CONSTRAINT `friends_requester_foreign` FOREIGN KEY (`requester`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `friends` (
 
 LOCK TABLES `friends` WRITE;
 /*!40000 ALTER TABLE `friends` DISABLE KEYS */;
-INSERT INTO `friends` VALUES (1,'accepted',1,2);
+INSERT INTO `friends` VALUES (1,'accepted',1,2),(2,'rejected',3,4);
 /*!40000 ALTER TABLE `friends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +233,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (1,2);
+INSERT INTO `likes` VALUES (1,2),(3,4);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `profile_genres` (
 
 LOCK TABLES `profile_genres` WRITE;
 /*!40000 ALTER TABLE `profile_genres` DISABLE KEYS */;
-INSERT INTO `profile_genres` VALUES (1,2),(1,12),(1,13),(2,13);
+INSERT INTO `profile_genres` VALUES (1,2),(1,12),(1,13),(2,13),(3,5),(3,6),(3,1),(4,2),(4,4);
 /*!40000 ALTER TABLE `profile_genres` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +307,7 @@ CREATE TABLE `profiles` (
   KEY `profiles_country_id_foreign` (`country_id`),
   CONSTRAINT `profiles_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`code`),
   CONSTRAINT `profiles_id_foreign` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,7 +316,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES (1,'hadi',25,'male','FI','2007-12-31 18:30:01'),(2,'elon',49,'male','US','2007-12-31 18:30:01');
+INSERT INTO `profiles` VALUES (1,'hadi',25,'male','FI','2007-12-31 18:30:01'),(2,'elon',49,'male','US','2007-12-31 18:30:01'),(3,'tony stark',55,'male','US','2007-12-31 18:30:01'),(4,'jon snow',35,'male','CA','2007-12-31 18:30:01');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +337,7 @@ CREATE TABLE `ratings` (
   KEY `ratings_content_id_foreign` (`content_id`),
   CONSTRAINT `ratings_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `contents` (`slug`),
   CONSTRAINT `ratings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +346,7 @@ CREATE TABLE `ratings` (
 
 LOCK TABLES `ratings` WRITE;
 /*!40000 ALTER TABLE `ratings` DISABLE KEYS */;
-INSERT INTO `ratings` VALUES (1,5,'infinity-war',1),(2,4,'inception',2);
+INSERT INTO `ratings` VALUES (1,5,'infinity-war',1),(2,4,'inception',2),(3,5,'the-dark-knight',3),(4,4,'forrest -gump',4),(5,3,'12-angry-men ',4);
 /*!40000 ALTER TABLE `ratings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,7 +366,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -375,7 +375,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'hadimir22@gmail.com','password',NULL,'2007-12-31 18:30:01',NULL),(2,'elonmusk@tesla.com','tothemoon',NULL,'2008-01-01 23:30:01',NULL);
+INSERT INTO `users` VALUES (1,'hadimir22@gmail.com','password',NULL,'2007-12-31 18:30:01',NULL),(2,'elonmusk@tesla.com','tothemoon',NULL,'2008-01-01 23:30:01',NULL),(3,'tony@stark.com','ironman',NULL,'2020-02-08 19:30:10',NULL),(4,'jon@snow.com','kinginthenorth',NULL,'2020-02-08 19:30:10',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -388,4 +388,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-23 19:07:07
+-- Dump completed on 2021-03-02 15:25:38
