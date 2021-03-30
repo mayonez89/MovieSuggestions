@@ -3,10 +3,9 @@
 namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Content extends Model
+class Content extends SirenModel
 {
     use SoftDeletes, Sluggable;
 
@@ -34,10 +33,10 @@ class Content extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+//    public function comments()
+//    {
+//        return $this->hasMany(Comment::class, 'content_id');
+//    }
 
     // many-to-many
     public function genres()
@@ -47,7 +46,7 @@ class Content extends Model
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class, 'content_id');
     }
 
     public function userRating(User $user)
@@ -55,8 +54,19 @@ class Content extends Model
         return $this->ratings()->where('user_id', $user->id);
     }
 
-    public function favoriting()
+    public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorite_movies', 'content_id', 'user_id');
+    }
+
+    /** return the array of implemented CRUD actions */
+    public static function getCRUD() {
+        return [
+            self::M_INDEX,
+            self::M_SHOW,
+            self::M_STORE,
+            self::M_DESTROY,
+            self::M_UPDATE,
+        ];
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da633d8d8657f8acb41490b44c7b38f2",
+    "content-hash": "53fe37695b0a0ce27bb861286184f7d0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -969,6 +969,48 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "jefersondaniel/siren-php",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jefersondaniel/sirenphp.git",
+                "reference": "542f23b2280d1dc13153c2f1574494ff7ef89fca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jefersondaniel/sirenphp/zipball/542f23b2280d1dc13153c2f1574494ff7ef89fca",
+                "reference": "542f23b2280d1dc13153c2f1574494ff7ef89fca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SirenPHP\\": "src/SirenPHP"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Jeferson Daniel",
+                    "email": "jeferson.daniel412@gmail.com"
+                }
+            ],
+            "description": "Siren hypermedia type implementation for PHP",
+            "keywords": [
+                "Siren",
+                "hypermedia",
+                "json"
+            ],
+            "support": {
+                "issues": "https://github.com/jefersondaniel/sirenphp/issues",
+                "source": "https://github.com/jefersondaniel/sirenphp/tree/master"
+            },
+            "time": "2016-03-18T02:49:02+00:00"
         },
         {
             "name": "laravel/framework",

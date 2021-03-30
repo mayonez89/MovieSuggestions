@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Content;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -30,7 +32,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $contentWith = ['genres', 'ratings'];
+        if(Auth::check()) {
+            $contentWith = ['genres', 'ratings', 'favorites'];
+        }
+        Route::bind('content', function ($value) use ($contentWith) {
+            return Content::where('slug', $value)->with($contentWith)->firstOrFail();
+        });
 
         parent::boot();
     }
