@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -9,8 +10,11 @@ class LoginController extends Controller
 
     public function login()
     {
+        $user = User::where('email', request()->get('email'))->where('password', request()->get('password'))->first();
+        $hash = md5(now());
+        $user->update(['hash' => $hash]);
         return response()->json([
-            'Fields' => 'required fields',
+            'hash' => $hash,
         ]);
     }
 
@@ -29,5 +33,10 @@ class LoginController extends Controller
         return response()->json([
             'logout' => 'successful',
         ]);
+    }
+
+    public function test(Request $request)
+    {
+        return $request->get('user_id');
     }
 }
