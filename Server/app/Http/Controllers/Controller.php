@@ -43,7 +43,7 @@ class Controller extends BaseController
     }
     /**
      * @OA\Info(
-     *      version="1.0.0",
+     *      version="1.0.1",
      *      title="PWP - Movie Suggestions",
      *      description="L5 Swagger OpenApi description",
      *      @OA\Contact(
