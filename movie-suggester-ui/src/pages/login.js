@@ -3,15 +3,20 @@ import { Container, Header, Image, Input, Button } from 'semantic-ui-react'
 import '../style/utils.css'
 import '../style/login.css'
 import img from '../assets/login.png'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'
-
+import config from '../config'
+   
 export default class Login extends React.Component {
     constructor(props) {
         super(props); 
 
         this.state = {
-            showSignup: false
+            showSignup: false,
+            email : null,
+            password: null,
+            isLoggedin: false,
+
         }
       }
     
@@ -19,17 +24,31 @@ export default class Login extends React.Component {
           this.setState({showSignup: !this.state.showSignup})
       }
 
+      login = () => {
+        console.log("sate", this.state)
+       let  params = {
+          email: this.state.email,
+          password : this.state.password
+        }
+        axios.post(`${config.base_URL}/login`, params)
+        .then((resp) => {
+          console.log('resp', resp)
+          localStorage.setItem('hash', resp.data.hash)
+          this.setState({isLoggedin: true})
+        })
+        .catch((e) => {
+          console.log("error", e)
+          alert('something went wrong, please try again')
+        })
+      }
+
       componentDidMount(){
-        console.log("loaded")
-        axios.get('http://127.0.0.1:8000/api/contents/end-game')
-       .then(function (response) {
-       // handle success
-        console.log(response);
-       })
-       .catch(function (error) {
-          // handle error
-          console.log(error);
-  })
+        console.log("checking if user is logged in already")  
+        if(localStorage.getItem('hash') && localStorage.getItem('hash').length != 0) {
+          console.log('logged in')
+          this.setState({isLoggedin: true})
+        } else {console.log('not logged in')}
+
       }
 
     render() {
@@ -45,28 +64,26 @@ export default class Login extends React.Component {
             <div> Login</div>
             </div>
             <div>
-            <Input placeholder='Email' focus type='email' />
+            <Input placeholder='Email' focus type='email' onChange= {(e) => this.setState({email: e.target.value})} />
             </div>
             <br/>
             <div>
-            <Input placeholder='Password' focus type='password' />
+            <Input placeholder='Password' focus type='password'  onChange= {(e) => this.setState({password: e.target.value})} />
             </div>
 
-            <div className='p20' >
-            <Link  to="/home">
-                 <Button basic color='teal'>
+            <div className='p20' > 
+                 <Button basic color='teal' onClick={() => this.login()}>
                   
                     Login
                   
-                 </Button>
-                 </Link>
+                 </Button> 
             </div>
-            <div>Or</div>
+            {/* <div>Or</div>
             <div className='p20'>
                  <Button basic color='olive' onClick={() => this.changeView()} >
                Signup
                </Button>
-            </div>
+            </div> */}
        
         </div>}
         { this.state.showSignup &&
@@ -101,6 +118,12 @@ export default class Login extends React.Component {
           </div>
         }
           </Container>
+
+        {
+          this.state.isLoggedin &&
+          <Redirect to="/home" />
+
+        }
         </>
       );
     }

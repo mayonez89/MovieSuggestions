@@ -1,12 +1,20 @@
 import React from 'react'
 import { Icon,  Menu, Segment  } from 'semantic-ui-react' 
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);  
+
+        this.state = {
+          logout: false
+        }
       }
- 
+      
+      logout = () =>{
+        localStorage.removeItem('hash')
+        this.setState({logout: true})
+      }
  
     render() { 
       return (
@@ -32,9 +40,22 @@ export default class NavBar extends React.Component {
               Profile
               </Link>
                </Menu.Item>
+
+               <Menu.Item
+            name='Profile'
+             
+          >
+            <Link to="/profile">
+              <Icon name='tv' />
+              Our suggestions
+              </Link>
+               </Menu.Item>
+
+
             <Menu.Menu position='right'>
           <Menu.Item
             name='Logout'
+            onClick = {() => {this.logout()}}
           >
               <Icon name='logout' />
               Logout
@@ -42,6 +63,12 @@ export default class NavBar extends React.Component {
           </Menu.Menu>
         </Menu>
       </Segment>
+
+      {
+        this.state.logout && 
+        <Redirect to="/" />
+
+      }
         </>
       );
     }
