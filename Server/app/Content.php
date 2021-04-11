@@ -23,7 +23,9 @@ class Content extends SirenModel
     {
         return [
             'slug' => [
-                'source' => ['name', 'year']
+                'source' => ['title',
+//                    'release_date',
+                    ]
             ]
         ];
     }

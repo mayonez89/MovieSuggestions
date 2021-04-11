@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use SirenPHP\Action;
 use SirenPHP\Entity;
 use SirenPHP\Field;
@@ -79,9 +78,9 @@ abstract class SirenModel extends Model
 
     private static function appendSirenEntities(self $instance, Entity &$entity)
     {
-        foreach($instance->getRelations() as $relationName => $collection)
+        foreach($instance->getRelations() as $relationName => $relation)
         {
-            if(count($collection)>0)
+            if($relation instanceof \Countable && count($relation)>0)
             {
                 $ent = new Entity(route($instance->getTable() . "." . $relationName . ".index", $instance->getKey()), [$relationName]);
                 $entity->appendEntity([], $ent);
