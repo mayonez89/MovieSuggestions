@@ -1,0 +1,90 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PWP - Movie Suggestions",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.1"
+    },
+    "servers": [
+        {
+            "url": "testurl.com",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/contents": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get list of projects",
+                "description": "Returns list of projects",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Content": {
+                "title": "Content",
+                "description": "Content model",
+                "properties": {
+                    "guarded": {
+                        "title": "title",
+                        "description": "title",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Hero wars 3"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Content"
+                }
+            },
+            "StoreRequest": {
+                "title": "Store Content request",
+                "description": "Store Content request body data",
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "": {
+                        "title": "title",
+                        "description": "Title of the new content",
+                        "type": "string",
+                        "example": "A nice content"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projects",
+            "description": "API Endpoints of Projects"
+        }
+    ],
+    "security": [
+        []
+    ]
+}

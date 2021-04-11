@@ -4,6 +4,14 @@ namespace App\Http\Requests\Content;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      title="Store Content request",
+ *      description="Store Content request body data",
+ *      type="object",
+ *      required={"title"}
+ * )
+ */
 class StoreRequest extends FormRequest
 {
     /**
@@ -31,4 +39,13 @@ class StoreRequest extends FormRequest
             'release_date' => 'numeric',
         ];
     }
+    /**
+     * @OA\Property(
+     *      title="title",
+     *      description="Title of the new content",
+     *      example="A nice content"
+     * )
+     *
+     * @var string
+     */
 }

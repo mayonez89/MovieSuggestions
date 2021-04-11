@@ -11,6 +11,28 @@ class ContentController extends Controller
 {
     const TYPE = 'content';
     const ROUTE_BASE = 'contents.';
+
+    /**
+     * @OA\Get(
+     *      path="/api/contents",
+     *      operationId="getProjectsList",
+     *      tags={"Projects"},
+     *      summary="Get list of projects",
+     *      description="Returns list of projects",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function index()
     {
         $contents = Content::all();
