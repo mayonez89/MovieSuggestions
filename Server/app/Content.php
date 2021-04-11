@@ -5,6 +5,15 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @OA\Schema(
+ *     title="Content",
+ *     description="Content model",
+ *     @OA\Xml(
+ *         name="Content"
+ *     )
+ * )
+ */
 class Content extends SirenModel
 {
     use SoftDeletes, Sluggable;
@@ -17,6 +26,16 @@ class Content extends SirenModel
     ];
     // search options
 
+    /**
+     * @OA\Property(
+     *     title="title",
+     *     description="title",
+     *     format="string",
+     *     example="Hero wars 3"
+     * )
+     *
+     * @var string
+     */
     protected $guarded = [];
 
     public function sluggable()
