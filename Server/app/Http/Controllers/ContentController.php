@@ -17,8 +17,8 @@ class ContentController extends Controller
      *      path="/api/contents",
      *      operationId="getProjectsList",
      *      tags={"Projects"},
-     *      summary="Get list of projects",
-     *      description="Returns list of projects",
+     *      summary="Get list of movies",
+     *      description="Returns list of movies",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
@@ -33,6 +33,31 @@ class ContentController extends Controller
      *      )
      *     )
      */
+
+       /**
+     * @OA\Post(
+     *      path="/api/contents",
+     *      operationId="getProjectsList",
+     *      tags={"Projects"},
+     *      summary="add content",
+     *      description="add content",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+
+     
+
     public function index()
     {
         $contents = Content::all();
