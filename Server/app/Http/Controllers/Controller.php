@@ -56,7 +56,7 @@ class Controller extends BaseController
      * )
      *
      * @OA\Server(
-     *      url="testurl.com",
+     *      url="/",
      *      description="Demo API Server"
      * )
      *

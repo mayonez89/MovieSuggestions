@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "testurl.com",
+            "url": "/",
             "description": "Demo API Server"
         }
     ],

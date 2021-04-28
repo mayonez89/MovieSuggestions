@@ -2,7 +2,7 @@
 
 ## 1) Required software
 
- - Install [PHP 7.2 (or higher)](https://www.php.net/manual/en/install.php),
+ - Install [PHP 7.4 (or higher)](https://www.php.net/manual/en/install.php),
  make sure it works in the console <code>php -v</code> should respond with the current version of the PHP
  - Install [MySQL 8.0 (or higher)](https://www.mysql.com/downloads/)
  - Install PHP dependencies <code>sudo apt install
