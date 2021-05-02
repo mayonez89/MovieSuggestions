@@ -38,6 +38,46 @@
                         "description": "Forbidden"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "add content",
+                "description": "add content",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "api/genres": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get list of genres",
+                "description": "Returns list of genres",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
             }
         }
     },
@@ -47,17 +87,41 @@
                 "title": "Content",
                 "description": "Content model",
                 "properties": {
-                    "guarded": {
+                    "": {
                         "title": "title",
-                        "description": "title",
+                        "description": "name of the movie",
                         "type": "string",
                         "format": "string",
-                        "example": "Hero wars 3"
+                        "example": "Inception"
+                    },
+                    "guarded": {
+                        "title": "genre",
+                        "description": "genre of the movie",
+                        "type": "string",
+                        "format": "string",
+                        "example": "action"
                     }
                 },
                 "type": "object",
                 "xml": {
                     "name": "Content"
+                }
+            },
+            "Genre": {
+                "title": "Genre",
+                "description": "Genre model",
+                "properties": {
+                    "guarded": {
+                        "title": "name",
+                        "description": "genre catagory",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Crime"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Genre"
                 }
             },
             "StoreRequest": {

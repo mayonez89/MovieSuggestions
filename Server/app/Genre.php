@@ -4,8 +4,30 @@ namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *     title="Genre",
+ *     description="Genre model",
+ *     @OA\Xml(
+ *         name="Genre"
+ *     )
+ * )
+ */
+
+
 class Genre extends SirenModel
 {
+      /**
+     * @OA\Property(
+     *     title="name",
+     *     description="genre catagory",
+     *     format="string",
+     *     example="Crime"
+     * )
+     *
+     * @var string
+     */
+
     protected $guarded = [];
 
     public $timestamps = false;

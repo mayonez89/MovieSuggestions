@@ -29,9 +29,20 @@ class Content extends SirenModel
     /**
      * @OA\Property(
      *     title="title",
-     *     description="title",
+     *     description="name of the movie",
      *     format="string",
-     *     example="Hero wars 3"
+     *     example="Inception"
+     * )
+     *
+     * @var string
+     */
+
+        /**
+     * @OA\Property(
+     *     title="genre",
+     *     description="genre of the movie",
+     *     format="string",
+     *     example="action"
      * )
      *
      * @var string
