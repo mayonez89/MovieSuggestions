@@ -23,5 +23,11 @@ class RegisterController extends Controller
             exit("Existing user, choose a different email.");
         }
         $user = User::create($data);
+        $hash = md5(now());
+        $user->update(['hash' => $hash]);
+        return response()->json([
+            'id' => $user->id,
+            'hash' => $hash,
+        ]);
     }
 }

@@ -14,6 +14,7 @@ class LoginController extends Controller
         $hash = md5(now());
         $user->update(['hash' => $hash]);
         return response()->json([
+            'id' => $user->id,
             'hash' => $hash,
         ]);
     }

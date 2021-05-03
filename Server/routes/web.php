@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('client');
+});
 
 //Route::get('db-structure', function () {
 //    return view('db-structure.index');
 //});
+
+
