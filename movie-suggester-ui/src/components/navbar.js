@@ -13,6 +13,7 @@ export default class NavBar extends React.Component {
       
       logout = () =>{
         localStorage.removeItem('hash')
+        localStorage.removeItem('id')
         this.setState({logout: true})
       }
  
@@ -46,8 +47,8 @@ export default class NavBar extends React.Component {
              
           >
             <Link to="/profile">
-              <Icon name='tv' />
-              Our suggestions
+              <Icon name='heart' />
+              Favourites
               </Link>
                </Menu.Item>
 
