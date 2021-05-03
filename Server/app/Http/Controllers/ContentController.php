@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Content;
 use App\Http\Requests\Content\StoreRequest;
 use App\SirenCollection;
+use App\Traits\SirenUserTrait;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    use SirenUserTrait;
+
     const TYPE = 'content';
     const ROUTE_BASE = 'contents.';
 
@@ -62,6 +65,7 @@ class ContentController extends Controller
     {
         $contents = Content::all();
         $collection = SirenCollection::getSirenCollection($contents, route(self::ROUTE_BASE . __FUNCTION__, [], false), Content::class);
+        $this->appendUserActions($collection);
         return $collection->__toString();
     }
 
@@ -75,7 +79,9 @@ class ContentController extends Controller
     public function store(StoreRequest $request)
     {
         $content = Content::create($request->all());
-        return Content::getSirenEntity($content)->__toString();
+        $object = Content::getSirenEntity($content);
+        $this->appendUserActions($object);
+        return $object->__toString();
     }
 
     public function edit(Content $content)
@@ -88,14 +94,18 @@ class ContentController extends Controller
     public function update(Content $content, Request $request)
     {
         $content->update($request->all());
-        return Content::getSirenEntity($content)->__toString();
+        $object = Content::getSirenEntity($content);
+        $this->appendUserActions($object);
+        return $object->__toString();
     }
 
     public function show(Content $content)
     {
         $content = Content::where($content->getKeyName(), $content->getKey())
             ->first();
-        return Content::getSirenEntity($content)->__toString();
+        $object = Content::getSirenEntity($content);
+        $this->appendUserActions($object);
+        return $object->__toString();
     }
 
     public function destroy(Content $content)

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use SirenPHP\Action;
 use SirenPHP\Entity;
 use SirenPHP\Link;
@@ -65,4 +66,9 @@ class Controller extends BaseController
      *     description="API Endpoints of Projects"
      * )
      */
+
+    protected function checkUser()
+    {
+        return request()->user_id === request()->user->id;
+    }
 }

@@ -19,6 +19,7 @@ class ContentGenreController extends Controller
         $collection = SirenCollection::getSirenCollection($genres,
             route(self::PARENT . self::ROUTE_BASE . __FUNCTION__, [$content], false),
             Content::class, self::PARENT);
+        $this->appendUserActions($collection);
         return $collection->__toString();
     }
 
