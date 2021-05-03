@@ -18,21 +18,9 @@ class LoginController extends Controller
         ]);
     }
 
-    public function loginAction()
+    public function logout()
     {
-        return response()->json([
-            'Required' => [
-                'email' => 'string|unique|email',
-                'password' => 'string',
-            ]
-        ]);
-    }
-
-    public function logoutAction()
-    {
-        return response()->json([
-            'logout' => 'successful',
-        ]);
+        User::where('hash', request()->header("hash"))->update(['hash' => null]);
     }
 
     public function test(Request $request)

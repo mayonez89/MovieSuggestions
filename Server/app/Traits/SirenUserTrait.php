@@ -1,0 +1,32 @@
+<?php
+namespace App\Traits;
+
+use App\User;
+use SirenPHP\Action;
+
+trait SirenUserTrait {
+    public function appendUserActions(&$sirenObject) {
+        $user = User::where('hash', request()->header('hash'))->first();
+        if(request()->header('hash') && $user) {
+            $this->appendLoggedInActions($sirenObject, $user);
+        } else {
+            $this->appendLoggedOutActions($sirenObject);
+        }
+    }
+
+    private function appendLoggedInActions(&$sirenObject, $user) {
+        $action = new Action('Logout action', route('logout'));
+        $action->setMethod("POST");
+        $sirenObject->appendAction($action);
+
+        $action = new Action('My favorites', route('users.favorites.index', $user->id));
+        $action->setMethod("GET");
+        $sirenObject->appendAction($action);
+    }
+
+    private function appendLoggedOutActions(&$sirenObject) {
+        $action = new Action('Login action', route('login'));
+        $action->setMethod("POST");
+        $sirenObject->appendAction($action);
+    }
+}

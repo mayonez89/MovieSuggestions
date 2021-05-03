@@ -54,7 +54,7 @@ Route::middleware([\App\Http\Middleware\LoggedInMiddleware::class])->group(funct
     /* profile */
 
     /* favorites */
-    Route::resource('profiles.favorites', 'FavoritesController')->except(['create', 'edit', 'show', 'update',]);
+    Route::resource('users.favorites', 'FavoritesController')->except(['create', 'edit', 'show', 'update',]);
     /* favorites */
 
     /* rating */
