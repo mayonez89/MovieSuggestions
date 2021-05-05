@@ -13,6 +13,7 @@ export default class Home extends React.Component {
         this.state = {
           movies : null,
           user: null,
+          head: null,
         }
 
         
@@ -23,11 +24,18 @@ export default class Home extends React.Component {
       componentDidMount(){
        this.getAll()
        let user = localStorage.getItem('id')
-       this.setState({user: user})
+       this.setState({
+         user: user,
+         head  : {
+          headers: {  'Access-Control-Allow-Origin' : '*',
+          hash : localStorage.getItem('hash')
+        }
+        }
+      })
       }
 
       getAll = () => {
-        axios.get(`${config.base_URL}/contents`).then((resp) => {
+        axios.get(`${config.base_URL}/contents`, this.state.head).then((resp) => {
           this.setState({movies : resp.data.entities})
         }).catch(e => {
           console.log('err in getting content', e)
@@ -44,13 +52,8 @@ export default class Home extends React.Component {
       favorite = (content) => {
         let params = {
           favorite: content
-        }
-
-        var head = {
-          headers: {  'Access-Control-Allow-Origin' : '*', },
-        }; 
-
-        axios.post(`${config.base_URL}/users/${this.state.user}/favorites`, params, { crossdomain: true } ).then((resp) => {
+        } 
+        axios.post(`${config.base_URL}/users/${this.state.user}/favorites`, params, this.state.head ).then((resp) => {
           console.log(resp.data)
           alert('added')
         }).catch(e => {

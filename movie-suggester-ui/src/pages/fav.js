@@ -13,13 +13,21 @@ export default class Favorite extends React.Component {
         this.state = {
             movies : null,
             user: null, 
+            head: null,
           }
         
       }
 
       componentDidMount(){
         let user = localStorage.getItem('id')
-        this.setState({user: user},() => {
+        this.setState({
+            user: user,
+            head  : {
+                headers: {  'Access-Control-Allow-Origin' : '*',
+                hash : localStorage.getItem('hash')
+              }
+            }
+        },() => {
             this.getAll()
         } )
        
@@ -28,7 +36,7 @@ export default class Favorite extends React.Component {
 
        delete = (content) => {
            
-        axios.delete(`${config.base_URL}/users/${this.state.user}/favorites/${content}`).then((resp) => {
+        axios.delete(`${config.base_URL}/users/${this.state.user}/favorites/${content}`, this.state.head).then((resp) => {
           console.log(resp.data)
           this.getAll()
         })
