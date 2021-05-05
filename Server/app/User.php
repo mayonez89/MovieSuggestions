@@ -64,4 +64,9 @@ class User extends Authenticatable
 //
 //        return $self_started->get()->merge($got_invited->get())->all();
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

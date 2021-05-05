@@ -13,51 +13,55 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* auth */
-Route::post('register', 'RegisterController@register')->name('register');
-Route::post('login', 'LoginController@login')->name('login');
-Route::post('logout', 'LoginController@logout')->name('logout');
-/* auth */
+// enabling CORS for all incoming sources
+Route::middleware(['cors'])->group(function () {
 
-/* content */
-Route::resource('contents', 'ContentController')->except(['create', 'edit',]);
-/* content */
+    /* auth */
+    Route::post('register', 'RegisterController@register')->name('register');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('logout', 'LoginController@logout')->name('logout');
+    /* auth */
 
-/* search */
-Route::get('search', 'SearchController@search')->name('search');
-/* search */
+    /* content */
+    Route::resource('contents', 'ContentController')->except(['create', 'edit',]);
+    /* content */
 
-/* comments */
-Route::resource('contents.genres', "ContentGenreController")->only(['index',]);
-Route::resource('genres', "GenreController")->only(['show', 'index',]);
-/* comments */
+    /* search */
+    Route::get('search', 'SearchController@search')->name('search');
+    /* search */
+
+    /* comments */
+    Route::resource('contents.genres', "ContentGenreController")->only(['index',]);
+    Route::resource('genres', "GenreController")->only(['show', 'index',]);
+    /* comments */
 
 
-/* friends */
+    /* friends */
 //Route::resource('friends', 'FriendController');
-/* friends */
+    /* friends */
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
 
-Route::middleware([\App\Http\Middleware\LoggedInMiddleware::class])->group(function () {
+    Route::middleware([\App\Http\Middleware\LoggedInMiddleware::class])->group(function () {
 
 
-    Route::resource('genres', "GenreController")->only(['store', 'update', 'destroy',]);
-    Route::put('contents/{content}/genres', "ContentGenreController@update")->name('contents.genres.update');
+        Route::resource('genres', "GenreController")->only(['store', 'update', 'destroy',]);
+        Route::put('contents/{content}/genres', "ContentGenreController@update")->name('contents.genres.update');
 
-    Route::get('test-login', 'LoginController@test');
+        Route::get('test-login', 'LoginController@test');
 
-    /* profile */
-    Route::resource('profiles','ProfileController')->except(['create', 'edit','index',]);
-    /* profile */
+        /* profile */
+        Route::resource('profiles', 'ProfileController')->except(['create', 'edit', 'index',]);
+        /* profile */
 
-    /* favorites */
-    Route::resource('users.favorites', 'FavoritesController')->except(['create', 'edit', 'show', 'update',]);
-    /* favorites */
+        /* favorites */
+        Route::resource('users.favorites', 'FavoritesController')->except(['create', 'edit', 'show', 'update',]);
+        /* favorites */
 
-    /* rating */
-    Route::resource('contents.ratings', 'RatingController')->only(['index', 'store', 'update',]);
-    /* rating */
+        /* rating */
+        Route::resource('contents.ratings', 'RatingController')->only(['index', 'store', 'update',]);
+        /* rating */
+    });
 });
