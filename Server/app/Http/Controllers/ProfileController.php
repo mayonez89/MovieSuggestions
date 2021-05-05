@@ -5,37 +5,44 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profiles\StoreRequest;
 use App\Http\Requests\Profiles\UpdateRequest;
 use App\Profile;
-use App\User;
-use Illuminate\Http\Request;
+use App\Traits\SirenUserTrait;
 
 class ProfileController extends Controller
 {
+    use SirenUserTrait;
+
     public function store(StoreRequest $request)
     {
-        Profile::create($request->only(['name', 'age', 'gender', 'country_id']));
-        return redirect()->json([
-            'action' => __FUNCTION__,
-        ]);
+        Profile::updateOrCreate(
+            ['user_id' => $request->get('user_id')],
+            array_merge($request->only(['name', 'age', 'gender', 'country_id']),
+                ['deleted_at' => null,],
+            ),
+        );
     }
 
-    public function show(User $profile)
+    public function show(Profile $profile)
     {
-        return redirect()->json([
-            'action' => __FUNCTION__,
-        ]);
+        if ($this->checkUser()) {
+            $object = Profile::getSirenEntity($profile);
+            $this->appendUserActions($object);
+            return $object->__toString();
+        }
     }
 
-    public function update(UpdateRequest $request)
+    public function update(Profile $profile, UpdateRequest $request)
     {
-        return redirect()->json([
-            'action' => __FUNCTION__,
-        ]);
+        request()->user = $profile->user()->first();
+        if ($this->checkUser()) {
+            $profile->update($request->only(['name', 'age', 'gender', 'country_id']));
+        }
     }
 
-    public function destroy()
+    public function destroy(Profile $profile)
     {
-        return redirect()->json([
-            'action' => __FUNCTION__,
-        ]);
+        request()->user = $profile->user()->first();
+        if ($this->checkUser()) {
+            $profile->delete();
+        }
     }
 }

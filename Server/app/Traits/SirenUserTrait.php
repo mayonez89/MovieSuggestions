@@ -22,6 +22,17 @@ trait SirenUserTrait {
         $action = new Action('My favorites', route('users.favorites.index', $user->id));
         $action->setMethod("GET");
         $sirenObject->appendAction($action);
+
+        $profile = $user->profile;
+        if($profile) {
+            $action = new Action('My profile', route('profiles.show', $profile->id));
+            $action->setMethod("GET");
+            $sirenObject->appendAction($action);
+        } else {
+            $action = new Action('Create profile', route('profiles.store'));
+            $action->setMethod("POST");
+            $sirenObject->appendAction($action);
+        }
     }
 
     private function appendLoggedOutActions(&$sirenObject) {
