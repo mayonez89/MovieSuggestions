@@ -16,6 +16,9 @@ export default class Login extends React.Component {
             email : null,
             password: null,
             isLoggedin: false,
+            signupEmail: null,
+            signupPass: null,
+            signupConfirmPass :null,
 
         }
       }
@@ -25,7 +28,6 @@ export default class Login extends React.Component {
       }
 
       login = () => {
-        console.log("sate", this.state)
        let  params = {
           email: this.state.email,
           password : this.state.password
@@ -34,12 +36,42 @@ export default class Login extends React.Component {
         .then((resp) => {
           console.log('resp', resp)
           localStorage.setItem('hash', resp.data.hash)
+          localStorage.setItem('id', resp.data.id)
           this.setState({isLoggedin: true})
         })
         .catch((e) => {
           console.log("error", e)
           alert('something went wrong, please try again')
         })
+      }
+
+      register = () => {
+        if(this.state.signupPass != this.state.signupConfirmPass){
+          alert('passwords do not match')
+        
+        } else {
+          console.log("sate", this.state)
+          let  params = {
+            email: this.state.signupEmail,
+            password : this.state.signupPass
+          }
+          axios.post(`${config.base_URL}/register`, params)
+          .then((resp) => {
+            console.log('resp', resp)
+            localStorage.setItem('hash', resp.data.hash)
+            localStorage.setItem('id', resp.data.id)
+            this.setState({isLoggedin: true})
+          })
+          .catch((error) => {
+            console.log("error", error)
+            alert('something went wrong, please try again')
+          })
+
+
+        }
+
+
+        
       }
 
       componentDidMount(){
@@ -78,12 +110,12 @@ export default class Login extends React.Component {
                   
                  </Button> 
             </div>
-            {/* <div>Or</div>
+            <div>Or</div>
             <div className='p20'>
                  <Button basic color='olive' onClick={() => this.changeView()} >
                Signup
                </Button>
-            </div> */}
+            </div> 
        
         </div>}
         { this.state.showSignup &&
@@ -92,19 +124,19 @@ export default class Login extends React.Component {
               <div>Signup</div>
               </div>
               <div>
-              <Input placeholder='Email' focus   type='email' />
+              <Input placeholder='Email' focus   type='email' onChange= {(e) => this.setState({signupEmail: e.target.value})} />
               </div>
               <br/>
               <div>
-              <Input placeholder='Password' focus type='password' />
+              <Input placeholder='Password' focus type='password' onChange= {(e) => this.setState({signupPass: e.target.value})} />
               </div>
               <br/>
               <div>
-              <Input placeholder='Confirm Password' focus type='password' />
+              <Input placeholder='Confirm Password' focus type='password' onChange= {(e) => this.setState({signupConfirmPass: e.target.value})} />
               </div>
   
               <div className='p20' >
-                   <Button basic color='teal'>
+                   <Button basic color='teal' onClick={() => this.register()}>
                       Sign Up
                    </Button>
               </div>

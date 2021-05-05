@@ -16,10 +16,26 @@ export default class Home extends React.Component {
       }
      
       componentDidMount(){
+       this.getAll()
+      }
+
+      getAll = () => {
         axios.get(`${config.base_URL}/contents`).then((resp) => {
-          console.log(resp.data.entities)
           this.setState({movies : resp.data.entities})
+        }).catch(e => {
+          console.log('err in getting content', e)
         })
+      }
+
+      delete = (content) => {
+        axios.delete(`${config.base_URL}/contents/${content}`).then((resp) => {
+          console.log(resp.data)
+          this.getAll()
+        })
+      }
+
+      favourite = (content) => {
+        
       }
 
 
@@ -45,7 +61,7 @@ export default class Home extends React.Component {
             {
                      this.state.movies.map(movie => {
                       return (
-                        <MovieCard movie={movie} />
+                        <MovieCard movie={movie} delete={this.delete} />
                       )
                       
                     }) 
@@ -65,25 +81,47 @@ export default class Home extends React.Component {
 class MovieCard extends React.Component{
   constructor(props) {
     super(props); 
-    console.log('props', props)
+    // console.log('props', props)
     this.state = {
       
     }
   }
+
   
 
   render() {
     return ( 
 
       <>
-      <Grid.Column>
-    <Card
-      image= {Player(this.props.movie.properties.trailer_url)}
-      header={this.props.movie.properties.title}
-      meta={this.props.movie.properties.release_date}
-      description={this.props.movie.properties.description}
-      extra={this.props.movie.properties.director}
-  />
+      <Grid.Column> 
+    <Card>
+     {Player(this.props.movie.properties.trailer_url)}
+    <Card.Content>
+      <Card.Header>{this.props.movie.properties.title}</Card.Header>
+      <Card.Meta>
+        <span className='date'>{this.props.movie.properties.release_date}</span>
+      </Card.Meta>
+      <Card.Description>
+        {this.props.movie.properties.description}
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <p>
+      <a>
+        <Icon name='user' />
+        {this.props.movie.properties.director}
+      </a>
+      </p>
+      <div className='ui two buttons'>
+          <Button basic color='red' onClick={() => this.props.delete(this.props.movie.properties.slug)} >
+          <Icon name='trash' />
+          </Button >
+          <Button basic color='green'>
+          <Icon name='heart' />
+          </Button>
+        </div>
+    </Card.Content>
+  </Card>
   </Grid.Column>
       </>
     )
