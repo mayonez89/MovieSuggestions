@@ -34,6 +34,7 @@ export default class Movie extends React.Component {
 
       getMovie = () => {
         axios.get(this.props.location.state.movie, this.state.head).then((resp) => {
+          console.log("mov", resp)
           this.setState({movie : resp.data.properties})
         }).catch(e => {
           console.log('err in getting content', e)

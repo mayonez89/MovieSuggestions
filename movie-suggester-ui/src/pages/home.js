@@ -140,14 +140,14 @@ class MovieCard extends React.Component{
         {this.props.movie.properties.director}
       </a>
       </p>
-      <div className='ui two buttons'>
+    {this.state.user &&  <div className='ui two buttons'>
           <Button basic color='red' onClick={() => this.props.delete(this.props.movie.properties.slug)} >
           <Icon name='trash' />
           </Button >
           <Button basic color='green' onClick={() => this.props.favorite(this.props.movie.properties.slug)} >
           <Icon name='heart' />
           </Button>
-        </div>
+        </div>}
     </Card.Content>
   </Card>
   </Grid.Column>

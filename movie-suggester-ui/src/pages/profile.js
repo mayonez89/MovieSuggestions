@@ -34,7 +34,11 @@ export default class Profile extends React.Component {
        }
  
        getUserProfile = () => {
-         axios.get(`${config.base_URL}/profile/${this.state.user}`, this.state.head).then((resp) => {
+        let params = {
+          user_id: this.state.user
+        } 
+
+         axios.get(`${config.base_URL}/profiles/${this.state.user}`, this.state.head).then((resp) => {
  
            console.log('prd',resp.data)
            this.setState({profile : resp.data})
