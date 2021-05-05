@@ -38,6 +38,8 @@ export default class Home extends React.Component {
 
       getAll = () => {
         axios.get(`${config.base_URL}/contents`, this.state.head).then((resp) => {
+
+          console.log('we',resp.data)
           this.setState({movies : resp.data.entities})
         }).catch(e => {
           console.log('err in getting content', e)
@@ -46,7 +48,7 @@ export default class Home extends React.Component {
 
       delete = (content) => {
         axios.delete(`${config.base_URL}/contents/${content}`).then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           this.getAll()
         })
       }
@@ -56,7 +58,7 @@ export default class Home extends React.Component {
           favorite: content
         } 
         axios.post(`${config.base_URL}/users/${this.state.user}/favorites`, params, this.state.head ).then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           alert('added')
         }).catch(e => {
           console.log('err in fav', e)
