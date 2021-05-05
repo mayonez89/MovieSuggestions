@@ -5,6 +5,7 @@ import Placeholders from '../components/placeholder';
 import config from '../config'
 import '../style/utils.css'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 
 export default class Favorite extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class Favorite extends React.Component {
             movies : null,
             user: null, 
             head: null,
+            redirect :false,
           }
         
       }
@@ -21,6 +23,7 @@ export default class Favorite extends React.Component {
       componentDidMount(){
         let user = localStorage.getItem('id')
         this.setState({
+            redirect :false,
             user: user,
             head  : {
                 headers: {  'Access-Control-Allow-Origin' : '*',
@@ -105,7 +108,7 @@ export default class Favorite extends React.Component {
         <Grid.Column> 
       <Card>
        {Player(this.props.movie.properties.trailer_url)}
-      <Card.Content>
+      <Card.Content onClick={() => this.setState({ redirect :true })} >
         <Card.Header>{this.props.movie.properties.title}</Card.Header>
         <Card.Meta>
           <span className='date'>{this.props.movie.properties.release_date}</span>
@@ -129,6 +132,19 @@ export default class Favorite extends React.Component {
       </Card.Content>
     </Card>
     </Grid.Column>
+
+
+    { this.state.redirect &&
+
+<Redirect
+to={{
+  pathname: "/movie", 
+  state: { movie: this.props.movie.links[0].href }
+}}
+/>
+
+
+    }
         </>
       )
   
@@ -147,3 +163,4 @@ export default class Favorite extends React.Component {
   
     )
   }
+

@@ -5,6 +5,7 @@ import Login from './pages/login'
 import Profile from './pages/profile'
 import FourOFour from './pages/404'
 import Favorite from './pages/fav'
+import Movie from './pages/movie'
  
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/home" component={Home} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/favorite" component={Favorite} />
+                <Route path="/movie" component={Movie} />
                 <Route component={FourOFour} />
             </Switch>
         </main>

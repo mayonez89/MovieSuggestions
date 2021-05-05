@@ -5,6 +5,8 @@ import Placeholders from '../components/placeholder';
 import config from '../config'
 import '../style/utils.css'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
+
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -120,7 +122,7 @@ class MovieCard extends React.Component{
       <Grid.Column> 
     <Card>
      {Player(this.props.movie.properties.trailer_url)}
-    <Card.Content>
+    <Card.Content onClick={() => this.setState({ redirect :true })}>
       <Card.Header>{this.props.movie.properties.title}</Card.Header>
       <Card.Meta>
         <span className='date'>{this.props.movie.properties.release_date}</span>
@@ -147,6 +149,22 @@ class MovieCard extends React.Component{
     </Card.Content>
   </Card>
   </Grid.Column>
+
+  
+
+
+  { this.state.redirect &&
+
+<Redirect
+to={{
+  pathname: "/movie", 
+  state: { movie: this.props.movie.links[0].href }
+}}
+/>
+
+
+    }
+
       </>
     )
 
