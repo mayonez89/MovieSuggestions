@@ -11,12 +11,19 @@ export default class Home extends React.Component {
         super(props); 
         
         this.state = {
-          movies : null
+          movies : null,
+          user: null,
         }
+
+        
+       
       }
-     
+
+   
       componentDidMount(){
        this.getAll()
+       let user = localStorage.getItem('id')
+       this.setState({user: user})
       }
 
       getAll = () => {
@@ -34,8 +41,22 @@ export default class Home extends React.Component {
         })
       }
 
-      favourite = (content) => {
-        
+      favorite = (content) => {
+        let params = {
+          favorite: content
+        }
+
+        var head = {
+          headers: {  'Access-Control-Allow-Origin' : '*', },
+        }; 
+
+        axios.post(`${config.base_URL}/users/${this.state.user}/favorites`, params, { crossdomain: true } ).then((resp) => {
+          console.log(resp.data)
+          alert('added')
+        }).catch(e => {
+          console.log('err in fav', e)
+          alert('something went wrong, please try again')
+        })
       }
 
 
@@ -61,7 +82,7 @@ export default class Home extends React.Component {
             {
                      this.state.movies.map(movie => {
                       return (
-                        <MovieCard movie={movie} delete={this.delete} />
+                        <MovieCard movie={movie} delete={this.delete} favorite={this.favorite} />
                       )
                       
                     }) 
@@ -116,7 +137,7 @@ class MovieCard extends React.Component{
           <Button basic color='red' onClick={() => this.props.delete(this.props.movie.properties.slug)} >
           <Icon name='trash' />
           </Button >
-          <Button basic color='green'>
+          <Button basic color='green' onClick={() => this.props.favorite(this.props.movie.properties.slug)} >
           <Icon name='heart' />
           </Button>
         </div>

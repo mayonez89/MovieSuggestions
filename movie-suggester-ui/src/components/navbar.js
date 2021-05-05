@@ -46,7 +46,7 @@ export default class NavBar extends React.Component {
             name='Profile'
              
           >
-            <Link to="/profile">
+            <Link to="/favorite">
               <Icon name='heart' />
               Favourites
               </Link>
