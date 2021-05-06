@@ -102,6 +102,7 @@ class ContentController extends Controller
     public function show(Content $content)
     {
         $content = Content::where($content->getKeyName(), $content->getKey())
+            ->with(["genres"])
             ->first();
         $object = Content::getSirenEntity($content);
         $this->appendUserActions($object);

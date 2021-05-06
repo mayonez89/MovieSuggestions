@@ -7,13 +7,24 @@ export default class NavBar extends React.Component {
         super(props);  
 
         this.state = {
-          logout: false
+          logout: false,
+          loggedin: false,
         }
       }
       
       logout = () =>{
         localStorage.removeItem('hash')
+        localStorage.removeItem('id')
         this.setState({logout: true})
+      }
+
+      componentDidMount(){
+        let user = localStorage.getItem('hash')
+        if(user){
+          this.setState({loggedin:true})
+        }else{
+        this.setState({loggedin:false})
+        }
       }
  
     render() { 
@@ -21,6 +32,7 @@ export default class NavBar extends React.Component {
         <>
     < Segment inverted>
         <Menu inverted pointing secondary>
+        { this.state.loggedin &&
           <Menu.Item
             name='Home'
           >
@@ -29,9 +41,9 @@ export default class NavBar extends React.Component {
                <Icon name='home' />
               Home
               </Link>
-               </Menu.Item>
+               </Menu.Item>}
                
-          <Menu.Item
+               { this.state.loggedin &&    <Menu.Item
             name='Profile'
              
           >
@@ -39,20 +51,20 @@ export default class NavBar extends React.Component {
               <Icon name='user' />
               Profile
               </Link>
-               </Menu.Item>
+               </Menu.Item> }
 
-               <Menu.Item
+               { this.state.loggedin &&       <Menu.Item
             name='Profile'
              
           >
-            <Link to="/profile">
-              <Icon name='tv' />
-              Our suggestions
+            <Link to="/favorite">
+              <Icon name='heart' />
+              Favourites
               </Link>
                </Menu.Item>
+    }
 
-
-            <Menu.Menu position='right'>
+{ this.state.loggedin && <Menu.Menu position='right'>
           <Menu.Item
             name='Logout'
             onClick = {() => {this.logout()}}
@@ -61,6 +73,7 @@ export default class NavBar extends React.Component {
               Logout
                </Menu.Item>
           </Menu.Menu>
+    }
         </Menu>
       </Segment>
 

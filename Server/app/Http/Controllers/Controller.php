@@ -67,7 +67,7 @@ class Controller extends BaseController
      * )
      */
 
-    protected function checkUser()
+    protected function checkUser(): bool
     {
         return request()->user_id === request()->user->id;
     }

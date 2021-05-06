@@ -6,9 +6,18 @@
     padding: 20px;
 }
 
+.p150 {
+    padding: 150px;
+}
+
 
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.big {
+    height: 500px !important;
 }

@@ -2,15 +2,19 @@
 
 namespace App;
 
-class Profile extends User
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Profile extends SirenModel
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public $timestamps = false;
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function genres()
@@ -21,5 +25,15 @@ class Profile extends User
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    protected static function getCRUD()
+    {
+        return [
+            self::M_SHOW,
+            self::M_STORE,
+            self::M_DESTROY,
+            self::M_UPDATE,
+        ];
     }
 }
