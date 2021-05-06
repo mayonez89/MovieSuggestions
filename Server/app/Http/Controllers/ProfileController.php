@@ -13,12 +13,13 @@ class ProfileController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Profile::updateOrCreate(
+        $profile = Profile::updateOrCreate(
             ['user_id' => $request->get('user_id')],
             array_merge($request->only(['name', 'age', 'gender', 'country_id']),
                 ['deleted_at' => null,],
             ),
         );
+        return route('profiles.show', $profile->id);
     }
 
     public function show(Profile $profile)
