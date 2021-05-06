@@ -38,6 +38,8 @@ export default class Home extends React.Component {
 
       getAll = () => {
         axios.get(`${config.base_URL}/contents`, this.state.head).then((resp) => {
+
+          console.log('we',resp.data)
           this.setState({movies : resp.data.entities})
         }).catch(e => {
           console.log('err in getting content', e)
@@ -46,7 +48,7 @@ export default class Home extends React.Component {
 
       delete = (content) => {
         axios.delete(`${config.base_URL}/contents/${content}`).then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           this.getAll()
         })
       }
@@ -56,7 +58,7 @@ export default class Home extends React.Component {
           favorite: content
         } 
         axios.post(`${config.base_URL}/users/${this.state.user}/favorites`, params, this.state.head ).then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           alert('added')
         }).catch(e => {
           console.log('err in fav', e)
@@ -138,14 +140,14 @@ class MovieCard extends React.Component{
         {this.props.movie.properties.director}
       </a>
       </p>
-      <div className='ui two buttons'>
+    {this.state.user &&  <div className='ui two buttons'>
           <Button basic color='red' onClick={() => this.props.delete(this.props.movie.properties.slug)} >
           <Icon name='trash' />
           </Button >
           <Button basic color='green' onClick={() => this.props.favorite(this.props.movie.properties.slug)} >
           <Icon name='heart' />
           </Button>
-        </div>
+        </div>}
     </Card.Content>
   </Card>
   </Grid.Column>
