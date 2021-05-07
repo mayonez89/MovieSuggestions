@@ -24,7 +24,7 @@ export default class Home extends React.Component {
 
    
       componentDidMount(){
-       this.getAll()
+       
        let user = localStorage.getItem('id')
        this.setState({
          user: user,
@@ -33,10 +33,12 @@ export default class Home extends React.Component {
           hash : localStorage.getItem('hash')
         }
         }
-      })
+      }, () => {this.getAll()})
+      
       }
 
       getAll = () => {
+        console.log('headdd', this.state.head)
         axios.get(`${config.base_URL}/contents`, this.state.head).then((resp) => {
 
           console.log('we',resp.data)
@@ -111,7 +113,7 @@ class MovieCard extends React.Component{
     super(props); 
     // console.log('props', props)
     this.state = {
-      
+      userlog : localStorage.getItem('hash')
     }
   }
 
@@ -140,7 +142,7 @@ class MovieCard extends React.Component{
         {this.props.movie.properties.director}
       </a>
       </p>
-    {this.state.user &&  <div className='ui two buttons'>
+    {this.state.userlog &&  <div className='ui two buttons'>
           <Button basic color='red' onClick={() => this.props.delete(this.props.movie.properties.slug)} >
           <Icon name='trash' />
           </Button >
