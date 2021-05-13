@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @OA\Schema(
  *     title="Content",
- *     description="Content model",
+ *     description="Content model, used only for movies for now.",
  *     @OA\Xml(
  *         name="Content"
  *     )
@@ -28,25 +28,61 @@ class Content extends SirenModel
 
     /**
      * @OA\Property(
-     *     title="title",
-     *     description="name of the movie",
-     *     format="string",
+     *     property="slug",
+     *     description="ID of a movie, represents the slugified title",
+     *     example="infinity-wars"
+     * )
+     *
+     * @var string
+     */
+    /**
+     * @OA\Property(
+     *     property="title",
+     *     description="The name of the movie",
      *     example="Inception"
      * )
      *
      * @var string
      */
-
-        /**
+    /**
      * @OA\Property(
-     *     title="genre",
-     *     description="genre of the movie",
-     *     format="string",
-     *     example="action"
+     *     property="trailer_url",
+     *     description="URL to the trailer, optional",
+     *     example="https://www.youtube.com/watch?v=6ZfuNTqbHE8"
      * )
      *
      * @var string
      */
+    /**
+     * @OA\Property(
+     *     property="description",
+     *     description="Description of the content, optional",
+     *     example="A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+     * )
+     *
+     * @var string
+     */
+    /**
+     * @OA\Property(
+     *     property="director",
+     *     description="Name of the director, optional",
+     *     example="Steven Spilberg"
+     * )
+     *
+     * @var string
+     */
+    /**
+     * @OA\Property(
+     *     property="release_date",
+     *     description="The year when the content was officially released, optional",
+     *     format="YYYY",
+     *     example="2020"
+     * )
+     *
+     * @var int
+     */
+
+
     protected $guarded = [];
 
     public function sluggable()

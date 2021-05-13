@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @OA\Schema(
+ *     title="User",
+ *     description="User model",
+ *     @OA\Xml(
+ *         name="User"
+ *     )
+ * )
+ */
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
@@ -17,8 +26,43 @@ class User extends Authenticatable
      *
      * @var array
      */
+    /**
+     * @OA\Property(
+     *     property="id",
+     *     description="ID of the user",
+     *     example="1"
+     * )
+     *
+     * @var integer
+     */
+    /**
+     * @OA\Property(
+     *     property="email",
+     *     description="User email",
+     *     format="email",
+     *     example="aujhazi20@student.oulu.fi"
+     * )
+     *
+     * @var string
+     */
+    /**
+     * @OA\Property(
+     *     property="password",
+     *     description="User password"
+     * )
+     *
+     * @var string
+     */
+    /**
+     * @OA\Property(
+     *     property="hash",
+     *     description="Generated when the user >logs in<, deleted when the user >logs out<, used to determine access right for certain API calls"
+     * )
+     *
+     * @var integer
+     */
     protected $fillable = [
-        'name', 'email', 'password', 'hash',
+        'email', 'password', 'hash',
     ];
 
     /**

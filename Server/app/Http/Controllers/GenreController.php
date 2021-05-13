@@ -6,11 +6,9 @@ use App\Content;
 use App\Genre;
 use App\Http\Requests\Content\Genre\CreateRequest;
 use App\SirenCollection;
-use App\Traits\SirenUserTrait;
 
 class GenreController extends Controller
 {
-    use SirenUserTrait;
 
     const TYPE = 'genre';
     const ROUTE_BASE = 'genres.';
@@ -20,21 +18,13 @@ class GenreController extends Controller
      * @OA\Get(
      *      path="api/genres",
      *      operationId="getProjectsList",
-     *      tags={"Projects"},
-     *      summary="Get list of genres",
+     *      tags={"Genres"},
+     *      summary="complete list of all genres",
      *      description="Returns list of genres",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
+     *       )
      *     )
      */
     public function index()
@@ -47,6 +37,19 @@ class GenreController extends Controller
         return $collection->__toString();
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/genres/{genre}",
+     *      operationId="getProjectsList",
+     *      tags={"Genre"},
+     *      summary="show genre",
+     *      description="show genre",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       )
+     *     )
+     */
     public function show(Genre $genre)
     {
         $retval = Genre::getSirenEntity($genre);
@@ -54,6 +57,23 @@ class GenreController extends Controller
         return $retval->__toString();
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/genres",
+     *      operationId="getProjectsList",
+     *      tags={"Genres"},
+     *      summary="add genre",
+     *      description="add genre",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     *     )
+     */
     public function store(CreateRequest $request)
     {
         Genre::create($request->only(['name']));
