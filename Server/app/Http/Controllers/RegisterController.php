@@ -6,6 +6,37 @@ use App\User;
 
 class RegisterController extends Controller
 {
+    /**
+     * @OA\Post(
+     *      path="/api/register",
+     *      operationId="getProjectsList",
+     *      tags={"User actions"},
+     *      summary="Register user",
+     *      description="Register user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Both email and password must be defined./Invalid email format./Existing user, choose a different email.",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          in="query",
+     *          required=true
+     *      )
+     * )
+     */
     public function register()
     {
         $data = request()->only(['email', 'password']);

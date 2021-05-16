@@ -19,10 +19,17 @@ class LoginController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *     @OA\Parameter(
+     *          name="email",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          in="query",
+     *          required=true
      *      )
+     *     )
      *     )
      */
     public function login()
@@ -36,6 +43,23 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/logout",
+     *      operationId="getProjectsList",
+     *      tags={"User actions"},
+     *      summary="user logout",
+     *      description="remove the hash used for the users authentication",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     * )
+     */
     public function logout()
     {
         User::where('hash', request()->header("hash"))->update(['hash' => null]);

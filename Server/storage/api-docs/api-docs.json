@@ -41,6 +41,33 @@
                 "summary": "add content",
                 "description": "add content",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "trailer_url",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "director",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "release_date",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -51,7 +78,7 @@
                 }
             }
         },
-        "/api/contents/{slug}": {
+        "/api/contents/{content}": {
             "get": {
                 "tags": [
                     "Content"
@@ -72,6 +99,38 @@
                 "summary": "edit content",
                 "description": "edit content",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "content",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "trailer_url",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "director",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "release_date",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -85,9 +144,16 @@
                 "tags": [
                     "Content"
                 ],
-                "summary": "add content",
-                "description": "add content",
+                "summary": "delete content",
+                "description": "delete content",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "content",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -98,7 +164,7 @@
                 }
             }
         },
-        "api/contents/{content}/genres": {
+        "/api/contents/{content}/genres": {
             "get": {
                 "tags": [
                     "Content Genres"
@@ -106,14 +172,19 @@
                 "summary": "list of genres belonging to a certain content",
                 "description": "Returns list of genres belonging to a certain content",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "content",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
                     }
                 }
-            }
-        },
-        "/api/contents/{content}/genres": {
+            },
             "put": {
                 "tags": [
                     "Content Genres"
@@ -121,6 +192,13 @@
                 "summary": "Update list of genres for selected content. Takes list of IDs.",
                 "description": "Update list of genres for selected content. Takes list of IDs.",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "content",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -131,7 +209,7 @@
                 }
             }
         },
-        "api/users/{user}/favorites": {
+        "/api/users/{user}/favorites": {
             "get": {
                 "tags": [
                     "User Favorites"
@@ -139,21 +217,39 @@
                 "summary": "list of favorite contents belonging to a certain user",
                 "description": "Returns list of favorite contents belonging to a certain user",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
                     }
                 }
-            }
-        },
-        "/api/users/{user}/favorites": {
+            },
             "post": {
                 "tags": [
-                    "User favorites"
+                    "User Favorites"
                 ],
                 "summary": "Add Favorite",
                 "description": "Adds the selected content to the list of the users' favorite contents.",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "favorite",
+                        "in": "query",
+                        "description": "content to be added as favorite",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -172,6 +268,19 @@
                 "summary": "Remove favorite",
                 "description": "From the list of a users favorite contents, remove the selected one.",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "favorite",
+                        "in": "path",
+                        "description": "content to be removed as favorite",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -182,7 +291,7 @@
                 }
             }
         },
-        "api/genres": {
+        "/api/genres": {
             "get": {
                 "tags": [
                     "Genres"
@@ -195,6 +304,29 @@
                         "description": "Successful operation"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "add genre",
+                "description": "add genre",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
             }
         },
         "/api/genres/{genre}": {
@@ -205,6 +337,63 @@
                 "summary": "show genre",
                 "description": "show genre",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "genre",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "delete genre",
+                "description": "delete genre",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "genre",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "User actions"
+                ],
+                "summary": "user login",
+                "description": "Gets the user ID and the user hash based on email and password.",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -212,17 +401,202 @@
                 }
             }
         },
-        "/api/genres": {
+        "/api/logout": {
             "post": {
                 "tags": [
-                    "Genres"
+                    "User actions"
                 ],
-                "summary": "add genre",
-                "description": "add genre",
+                "summary": "user logout",
+                "description": "remove the hash used for the users authentication",
                 "operationId": "getProjectsList",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/profiles": {
+            "post": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Create profile",
+                "description": "Creates a new profile",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "birth_date",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/profiles/{profile}": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Show profile",
+                "description": "Get all info about a user profile",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update profile",
+                "description": "Update the current users profile",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "birth_date",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "delete profile",
+                "description": "soft delete the profile of a current user - the account will still continue to exist.",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/update-password": {
+            "post": {
+                "tags": [
+                    "User actions"
+                ],
+                "summary": "change password",
+                "description": "updates the password of the user logged in",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "new-password",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Missing parameter: new-password"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "User actions"
+                ],
+                "summary": "Register user",
+                "description": "Register user",
+                "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Both email and password must be defined./Invalid email format./Existing user, choose a different email."
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -294,22 +668,6 @@
                     "name": "Genre"
                 }
             },
-            "StoreRequest": {
-                "title": "Store Content request",
-                "description": "Store Content request body data",
-                "required": [
-                    "title"
-                ],
-                "properties": {
-                    "": {
-                        "title": "title",
-                        "description": "Title of the new content",
-                        "type": "string",
-                        "example": "A nice content"
-                    }
-                },
-                "type": "object"
-            },
             "Profile": {
                 "title": "Profile",
                 "description": "Profile model",
@@ -379,6 +737,13 @@
                 "xml": {
                     "name": "User"
                 }
+            }
+        },
+        "parameters": {
+            "content": {
+                "name": "content",
+                "in": "path",
+                "required": true
             }
         }
     },

@@ -16,7 +16,7 @@ class GenreController extends Controller
 
     /**
      * @OA\Get(
-     *      path="api/genres",
+     *      path="/api/genres",
      *      operationId="getProjectsList",
      *      tags={"Genres"},
      *      summary="complete list of all genres",
@@ -47,7 +47,12 @@ class GenreController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
+     *       ),
+     *     @OA\Parameter(
+     *          name="genre",
+     *          in="path",
+     *          required=true
+     *      )
      *     )
      */
     public function show(Genre $genre)
@@ -71,6 +76,11 @@ class GenreController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="name",
+     *          in="query",
+     *          required=true
      *      )
      *     )
      */
@@ -79,6 +89,28 @@ class GenreController extends Controller
         Genre::create($request->only(['name']));
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/genres/{genre}",
+     *      operationId="getProjectsList",
+     *      tags={"Genre"},
+     *      summary="delete genre",
+     *      description="delete genre",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="genre",
+     *          in="path",
+     *          required=true
+     *      )
+     *     )
+     */
     public function destroy(Genre $genre)
     {
         $genre->contents()->detach();
