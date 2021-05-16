@@ -2,12 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\SirenUserTrait;
 use App\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-
+    /**
+     * @OA\Post(
+     *      path="/api/login",
+     *      operationId="getProjectsList",
+     *      tags={"User actions"},
+     *      summary="user login",
+     *      description="Gets the user ID and the user hash based on email and password.",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     *     )
+     */
     public function login()
     {
         $user = User::where('email', request()->get('email'))->where('password', request()->get('password'))->first();

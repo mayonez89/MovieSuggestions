@@ -19,9 +19,17 @@ class Genre extends SirenModel
 {
       /**
      * @OA\Property(
-     *     title="name",
-     *     description="genre catagory",
-     *     format="string",
+     *     property="id",
+     *     description="ID of genre",
+     *     example="1"
+     * )
+     *
+     * @var integer
+     */
+    /**
+     * @OA\Property(
+     *     property="name",
+     *     description="Genre category",
      *     example="Crime"
      * )
      *

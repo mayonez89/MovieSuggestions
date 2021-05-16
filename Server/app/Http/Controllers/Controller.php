@@ -2,45 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\SirenUserTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
-use SirenPHP\Action;
-use SirenPHP\Entity;
-use SirenPHP\Link;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SirenUserTrait;
 
     const TYPE = 'define_type';
 
     protected function SirenCollectionBuilder(Collection $collection, $href)
     {
-//        dd();
-//        $collection = new Entity(
-//            $href,
-//            ['count' => count($collection)],
-//            ['collection']
-//        );
-//        $entity = new Entity(
-//            '/book/1',
-//            ['name' => 'The Book 1'],
-//            [static::TYPE]
-//        );
-//        $collection->appendEntity(['item'], $entity);
-//        $link = new Link(['next'], '/collection/2');
-//        $collection->appendLink($link);
-//
-//
-//
-//        $action = new Action('action', 'href');
-//        $collection->appendAction($action);
-//
-//        return $collection;
     }
     /**
      * @OA\Info(
@@ -48,22 +24,23 @@ class Controller extends BaseController
      *      title="PWP - Movie Suggestions",
      *      description="L5 Swagger OpenApi description",
      *      @OA\Contact(
-     *          email="admin@admin.com"
+     *          name=" the backend developer",
+     *          email="aujhazi20@student.oulu.fi"
      *      ),
      *      @OA\License(
-     *          name="Apache 2.0",
-     *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
+     *          name="Contact the frontend developer",
+     *          url="mailto:hadi.mir@student.oulu.fi"
      *      )
      * )
      *
      * @OA\Server(
-     *      url="/",
-     *      description="Demo API Server"
+     *      url="http://18.196.196.249/",
+     *      description="PWP Demo API Server"
      * )
      *
      * @OA\Tag(
-     *     name="Projects",
-     *     description="API Endpoints of Projects"
+     *     name="PWP Project",
+     *     description="API Endpoints of Movie Suggestions"
      * )
      */
 

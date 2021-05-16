@@ -4,44 +4,39 @@
         "title": "PWP - Movie Suggestions",
         "description": "L5 Swagger OpenApi description",
         "contact": {
-            "email": "admin@admin.com"
+            "name": " the backend developer",
+            "email": "aujhazi20@student.oulu.fi"
         },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "Contact the frontend developer",
+            "url": "mailto:hadi.mir@student.oulu.fi"
         },
         "version": "1.0.1"
     },
     "servers": [
         {
-            "url": "/",
-            "description": "Demo API Server"
+            "url": "http://18.196.196.249/",
+            "description": "PWP Demo API Server"
         }
     ],
     "paths": {
         "/api/contents": {
             "get": {
                 "tags": [
-                    "Projects"
+                    "Contents"
                 ],
-                "summary": "Get list of projects",
-                "description": "Returns list of projects",
+                "summary": "get the complete list of content available",
+                "description": "Returns list of movies",
                 "operationId": "getProjectsList",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "Projects"
+                    "Contents"
                 ],
                 "summary": "add content",
                 "description": "add content",
@@ -52,20 +47,30 @@
                     },
                     "401": {
                         "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     }
                 }
             }
         },
-        "api/genres": {
+        "/api/contents/{slug}": {
             "get": {
                 "tags": [
-                    "Projects"
+                    "Content"
                 ],
-                "summary": "Get list of genres",
-                "description": "Returns list of genres",
+                "summary": "show content",
+                "description": "show content",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Content"
+                ],
+                "summary": "edit content",
+                "description": "edit content",
                 "operationId": "getProjectsList",
                 "responses": {
                     "200": {
@@ -73,9 +78,154 @@
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Content"
+                ],
+                "summary": "add content",
+                "description": "add content",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     },
-                    "403": {
-                        "description": "Forbidden"
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "api/contents/{content}/genres": {
+            "get": {
+                "tags": [
+                    "Content Genres"
+                ],
+                "summary": "list of genres belonging to a certain content",
+                "description": "Returns list of genres belonging to a certain content",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/contents/{content}/genres": {
+            "put": {
+                "tags": [
+                    "Content Genres"
+                ],
+                "summary": "Update list of genres for selected content. Takes list of IDs.",
+                "description": "Update list of genres for selected content. Takes list of IDs.",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "api/users/{user}/favorites": {
+            "get": {
+                "tags": [
+                    "User Favorites"
+                ],
+                "summary": "list of favorite contents belonging to a certain user",
+                "description": "Returns list of favorite contents belonging to a certain user",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/users/{user}/favorites": {
+            "post": {
+                "tags": [
+                    "User favorites"
+                ],
+                "summary": "Add Favorite",
+                "description": "Adds the selected content to the list of the users' favorite contents.",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/users/{user}/favorites/{favorite}": {
+            "delete": {
+                "tags": [
+                    "User Favorite"
+                ],
+                "summary": "Remove favorite",
+                "description": "From the list of a users favorite contents, remove the selected one.",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "api/genres": {
+            "get": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "complete list of all genres",
+                "description": "Returns list of genres",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/genres/{genre}": {
+            "get": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "show genre",
+                "description": "show genre",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/genres": {
+            "post": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "add genre",
+                "description": "add genre",
+                "operationId": "getProjectsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
                     }
                 }
             }
@@ -85,21 +235,38 @@
         "schemas": {
             "Content": {
                 "title": "Content",
-                "description": "Content model",
+                "description": "Content model, used only for movies for now.",
                 "properties": {
-                    "": {
-                        "title": "title",
-                        "description": "name of the movie",
+                    "slug": {
+                        "description": "ID of a movie, represents the slugified title",
                         "type": "string",
-                        "format": "string",
+                        "example": "infinity-wars"
+                    },
+                    "title": {
+                        "description": "The name of the movie",
+                        "type": "string",
                         "example": "Inception"
                     },
-                    "guarded": {
-                        "title": "genre",
-                        "description": "genre of the movie",
+                    "trailer_url": {
+                        "description": "URL to the trailer, optional",
                         "type": "string",
-                        "format": "string",
-                        "example": "action"
+                        "example": "https://www.youtube.com/watch?v=6ZfuNTqbHE8"
+                    },
+                    "description": {
+                        "description": "Description of the content, optional",
+                        "type": "string",
+                        "example": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+                    },
+                    "director": {
+                        "description": "Name of the director, optional",
+                        "type": "string",
+                        "example": "Steven Spilberg"
+                    },
+                    "release_date": {
+                        "description": "The year when the content was officially released, optional",
+                        "type": "integer",
+                        "format": "YYYY",
+                        "example": "2020"
                     }
                 },
                 "type": "object",
@@ -111,11 +278,14 @@
                 "title": "Genre",
                 "description": "Genre model",
                 "properties": {
-                    "guarded": {
-                        "title": "name",
-                        "description": "genre catagory",
+                    "id": {
+                        "description": "ID of genre",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Genre category",
                         "type": "string",
-                        "format": "string",
                         "example": "Crime"
                     }
                 },
@@ -139,13 +309,83 @@
                     }
                 },
                 "type": "object"
+            },
+            "Profile": {
+                "title": "Profile",
+                "description": "Profile model",
+                "properties": {
+                    "id": {
+                        "description": "ID of profile",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "Arnold Ujhazi"
+                    },
+                    "birth_date": {
+                        "description": "Birth date of a profile",
+                        "type": "integer",
+                        "format": "YYYY",
+                        "example": "1989"
+                    },
+                    "gender": {
+                        "description": "Gender of a user, optional",
+                        "type": "string",
+                        "example": "male"
+                    },
+                    "country_id": {
+                        "description": "Country of the user, optional",
+                        "type": "string",
+                        "example": "FI"
+                    },
+                    "user_id": {
+                        "description": "ID of the user who owns the profile",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Profile"
+                }
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the user",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "email": {
+                        "description": "User email",
+                        "type": "string",
+                        "format": "email",
+                        "example": "aujhazi20@student.oulu.fi"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string"
+                    },
+                    "hash": {
+                        "description": "Generated when the user >logs in<, deleted when the user >logs out<, used to determine access right for certain API calls",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
             }
         }
     },
     "tags": [
         {
-            "name": "Projects",
-            "description": "API Endpoints of Projects"
+            "name": "PWP Project",
+            "description": "API Endpoints of Movie Suggestions"
         }
     ],
     "security": [

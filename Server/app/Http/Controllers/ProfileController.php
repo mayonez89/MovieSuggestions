@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profiles\StoreRequest;
 use App\Http\Requests\Profiles\UpdateRequest;
 use App\Profile;
-use App\Traits\SirenUserTrait;
 
 class ProfileController extends Controller
 {
-    use SirenUserTrait;
 
     public function store(StoreRequest $request)
     {
