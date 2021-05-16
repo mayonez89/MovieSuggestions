@@ -46,6 +46,7 @@ Route::middleware(['cors'])->group(function () {
 
     Route::middleware([\App\Http\Middleware\LoggedInMiddleware::class])->group(function () {
 
+        Route::put('update-password', 'ProfileController@updatePassword')->name('update-password');
 
         Route::resource('genres', "GenreController")->only(['store', 'update', 'destroy',]);
         Route::put('contents/{content}/genres', "ContentGenreController@update")->name('contents.genres.update');
