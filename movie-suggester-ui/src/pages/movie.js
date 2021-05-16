@@ -49,7 +49,8 @@ export default class Movie extends React.Component {
       getGenre = (genre) => {
         console.log('weget',genre, this.state.head)
         axios.get(genre, this.state.head).then((resp) => {
-          console.log("gen", resp) 
+          console.log("gen", resp.data.entities[0].properties.name) 
+          this.setState({genre:resp.data.entities[0].properties.name })
           // this.setState({genre : resp.data.properties})
         }).catch(e => {
           console.log('err in getting genre', e)
@@ -68,10 +69,10 @@ export default class Movie extends React.Component {
        <Container className="p150"    > 
         <Card fluid>
      {Player(this.state.movie.trailer_url)}
-    <Card.Content onClick={() => this.setState({ redirect :true })}>
+    <Card.Content  >
       <Card.Header>{this.state.movie.title}</Card.Header>
       <Card.Meta>
-        <span className='date'>{this.state.movie.release_date}</span>
+        <span className='date'>{this.state.movie.release_date}  -   {this.state.genre}</span>
       </Card.Meta>
       <Card.Description>
         {this.state.movie.description}
