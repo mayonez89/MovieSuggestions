@@ -86,6 +86,13 @@
                 "summary": "show content",
                 "description": "show content",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "content",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -737,13 +744,6 @@
                 "xml": {
                     "name": "User"
                 }
-            }
-        },
-        "parameters": {
-            "content": {
-                "name": "content",
-                "in": "path",
-                "required": true
             }
         }
     },
