@@ -10,7 +10,7 @@ export default class Profile extends React.Component {
         super(props);  
         
         this.state = {
-          profile : null,
+          password : null,
           user: null,
         }
       }
@@ -25,25 +25,22 @@ export default class Profile extends React.Component {
          }
          }
        }, () => {
-        console.log("tijs", this.state)
-       this.getUserProfile()
+        console.log("tijs", this.state) 
 
        })
        
 
        }
  
-       getUserProfile = () => {
-        let params = {
-          user_id: this.state.user
-        } 
-
-         axios.get(`${config.base_URL}/profiles/${this.state.user}`, this.state.head).then((resp) => {
+       updatePass = () => {
+      
+        console.log('asw', this.state)
+         axios.put(`${config.base_URL}/update-password/`, {'new-password': this.state.password}, this.state.head).then((resp) => {
  
-           console.log('prd',resp.data)
-           this.setState({profile : resp.data})
+           console.log('prd',resp.data) 
          }).catch(e => {
            console.log('err in getting content', e)
+           alert('something went wrong. Please try again')
          })
        }
      
@@ -52,15 +49,20 @@ export default class Profile extends React.Component {
       return (
         <>
        <NavBar/>
-{ !this.state.profile &&        <Container  className="p50" textAlign="center">
-            <PlaceholderExampleParagraph/>
-       </Container>}
-       {
-         this.state.profile &&
-         <Container className='p50' >
+          <div  className='p50 center' >
+          Change password
+          </div>
+         <div  className='p50 center' >
+                       <Input placeholder='Password' focus type='text'  onChange= {(e) => this.setState({password: e.target.value})} />
+                       <div className='p20' > 
+                 <Button basic color='teal' onClick={() => this.updatePass()}>
+                  
+                    Change password
+                  
+                 </Button> 
+            </div>
 
-           </Container>
-       }
+           </div> 
         </>
       );
     }
