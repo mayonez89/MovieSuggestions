@@ -17,7 +17,6 @@ export default class Home extends React.Component {
      
       componentDidMount(){
         axios.get(`${config.base_URL}/contents`).then((resp) => {
-          console.log(resp.data.entities)
           this.setState({movies : resp.data.entities})
         })
       }
@@ -65,7 +64,6 @@ export default class Home extends React.Component {
 class MovieCard extends React.Component{
   constructor(props) {
     super(props); 
-    console.log('props', props)
     this.state = {
       
     }

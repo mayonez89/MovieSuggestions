@@ -40,14 +40,14 @@ export default class Favorite extends React.Component {
        delete = (content) => {
            
         axios.delete(`${config.base_URL}/users/${this.state.user}/favorites/${content}`, this.state.head).then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           this.getAll()
         })
       }
 
        getAll = () => {
         axios.get(`${config.base_URL}/users/${this.state.user}/favorites`).then((resp) => {
-        console.log('res', resp)
+        // console.log('res', resp)
         
             this.setState({movies : resp.data.entities})
            
