@@ -23,6 +23,10 @@ class ContentGenreController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -55,6 +59,10 @@ class ContentGenreController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",

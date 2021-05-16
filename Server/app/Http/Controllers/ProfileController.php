@@ -67,6 +67,10 @@ class ProfileController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
@@ -98,6 +102,10 @@ class ProfileController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
@@ -142,7 +150,11 @@ class ProfileController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
-     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       )
      *     )
      */
     public function destroy(Profile $profile)

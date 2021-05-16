@@ -116,6 +116,10 @@ class ContentController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -169,6 +173,10 @@ class ContentController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -198,6 +206,10 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
      *       ),
      *      @OA\Response(
      *          response=401,
