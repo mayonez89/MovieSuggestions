@@ -25,14 +25,12 @@ export default class Login extends React.Component {
       }
 
       login = () => {
-        console.log("sate", this.state)
        let  params = {
           email: this.state.email,
           password : this.state.password
         }
         axios.post(`${config.base_URL}/login`, params)
         .then((resp) => {
-          console.log('resp', resp)
           localStorage.setItem('hash', resp.data.hash)
           this.setState({isLoggedin: true})
         })
@@ -45,7 +43,6 @@ export default class Login extends React.Component {
       componentDidMount(){
         console.log("checking if user is logged in already")  
         if(localStorage.getItem('hash') && localStorage.getItem('hash').length != 0) {
-          console.log('logged in')
           this.setState({isLoggedin: true})
         } else {console.log('not logged in')}
 

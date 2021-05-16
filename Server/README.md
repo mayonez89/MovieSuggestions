@@ -31,21 +31,22 @@ Upon any edition to this file the server needs to be restarted to take effect. *
 
 ## 3) Install requirements via the Composer
 
-- within the command line, navigate to the 
+- Within the command line, navigate to the 
 [Server folder](https://github.com/mayonez89/MovieSuggestions/blob/main/Server)
- - Run command: <code>composer install</code>
+ - Run command: <code>composer install</code> - this will install all the requirements
 
 ## 4) Migrate the database
 
- - within the command line, navigate to the 
+ - Within the command line, navigate to the 
 [Server folder](https://github.com/mayonez89/MovieSuggestions/blob/main/Server)
- - Run command: <code>php artisan migrate:fresh --seed</code>
- - Navigate to root of the project and locate `db-dump.sql` inside `Database` folder.
+ - Run command: <code>php artisan migrate:fresh</code> - this sets up the database schema without example data
+ - Navigate to root of the project and locate `data_only.sql` inside `Database` folder.
  - To populate the database login to mysql
  - run `use whatever_is_your_db`
- - run `source path_of_db-dump.sql`
+ - run `source data_only.sql`
+- alternate solution: `mysql -u [username] -p [db_name] < Database/data_only.sql`
 ## 5) Run the server
 
-- within the command line, navigate to the 
+- Within the command line, navigate to the 
 [Server folder](https://github.com/mayonez89/MovieSuggestions/blob/main/Server)
  - Run command: <code>php artisan serve</code>

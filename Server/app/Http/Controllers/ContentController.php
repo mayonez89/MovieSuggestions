@@ -56,6 +56,31 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="title",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="trailer_url",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="description",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="director",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="release_date",
+     *          in="query",
+     *          required=false
      *      )
      *     )
      */
@@ -78,7 +103,7 @@ class ContentController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/api/contents/{slug}",
+     *      path="/api/contents/{content}",
      *      operationId="getProjectsList",
      *      tags={"Content"},
      *      summary="edit content",
@@ -90,6 +115,36 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="content",
+     *          in="path",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="title",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="trailer_url",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="description",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="director",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="release_date",
+     *          in="query",
+     *          required=false
      *      )
      *     )
      */
@@ -105,7 +160,7 @@ class ContentController extends Controller
 
     /**
      * @OA\Get (
-     *      path="/api/contents/{slug}",
+     *      path="/api/contents/{content}",
      *      operationId="getProjectsList",
      *      tags={"Content"},
      *      summary="show content",
@@ -114,7 +169,12 @@ class ContentController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       )
-     *     )
+     *     ),
+     *     @OA\Parameter(
+     *          name="content",
+     *          in="path",
+     *          required=true
+     *      )
      */
     public function show(Content $content)
     {
@@ -130,11 +190,11 @@ class ContentController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/contents/{slug}",
+     *      path="/api/contents/{content}",
      *      operationId="getProjectsList",
      *      tags={"Content"},
-     *      summary="add content",
-     *      description="add content",
+     *      summary="delete content",
+     *      description="delete content",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
@@ -142,6 +202,11 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="content",
+     *          in="path",
+     *          required=true
      *      )
      *     )
      */

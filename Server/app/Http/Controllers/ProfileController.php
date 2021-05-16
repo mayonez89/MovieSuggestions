@@ -9,7 +9,38 @@ use App\User;
 
 class ProfileController extends Controller
 {
-
+    /**
+     * @OA\Post(
+     *      path="/api/profiles",
+     *      operationId="getProjectsList",
+     *      tags={"Profile"},
+     *      summary="Create profile",
+     *      description="Creates a new profile",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="name",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="birth_date",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="gender",
+     *          in="query",
+     *          required=false
+     *      )
+     *     )
+     */
     public function store(StoreRequest $request)
     {
         $profile = Profile::updateOrCreate(
@@ -21,6 +52,28 @@ class ProfileController extends Controller
         return route('profiles.show', $profile->id);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/profiles/{profile}",
+     *      operationId="getProjectsList",
+     *      tags={"Profile"},
+     *      summary="Show profile",
+     *      description="Get all info about a user profile",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="profile",
+     *          in="path",
+     *          required=true
+     *      )
+     *     )
+     */
     public function show(Profile $profile)
     {
         if ($this->checkUser()) {
@@ -30,6 +83,43 @@ class ProfileController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *      path="/api/profiles/{profile}",
+     *      operationId="getProjectsList",
+     *      tags={"Profile"},
+     *      summary="Update profile",
+     *      description="Update the current users profile",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="profile",
+     *          in="path",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="name",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="birth_date",
+     *          in="query",
+     *          required=false
+     *      ),
+     *     @OA\Parameter(
+     *          name="gender",
+     *          in="query",
+     *          required=false
+     *      )
+     *     )
+     */
     public function update(Profile $profile, UpdateRequest $request)
     {
         request()->user = $profile->user()->first();
@@ -38,6 +128,23 @@ class ProfileController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/profiles/{profile}",
+     *      operationId="getProjectsList",
+     *      tags={"Profile"},
+     *      summary="delete profile",
+     *      description="soft delete the profile of a current user - the account will still continue to exist.",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     *     )
+     */
     public function destroy(Profile $profile)
     {
         request()->user = $profile->user()->first();
@@ -46,6 +153,42 @@ class ProfileController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/update-password",
+     *      operationId="getProjectsList",
+     *      tags={"User actions"},
+     *      summary="change password",
+     *      description="updates the password of the user logged in",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Missing parameter: new-password"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="new-password",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          in="query",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          in="query",
+     *          required=true
+     *      )
+     *     )
+     */
     public function updatePassword()
     {
         $param = "new-password";

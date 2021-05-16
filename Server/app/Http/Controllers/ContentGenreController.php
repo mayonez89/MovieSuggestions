@@ -14,7 +14,7 @@ class ContentGenreController extends Controller
 
     /**
      * @OA\Get(
-     *      path="api/contents/{content}/genres",
+     *      path="/api/contents/{content}/genres",
      *      operationId="getProjectsList",
      *      tags={"Content Genres"},
      *      summary="list of genres belonging to a certain content",
@@ -22,7 +22,12 @@ class ContentGenreController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
+     *       ),
+     *     @OA\Parameter(
+     *          name="content",
+     *          in="path",
+     *          required=true
+     *      )
      *     )
      */
     public function index(Content $content)
@@ -49,6 +54,11 @@ class ContentGenreController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="content",
+     *          in="path",
+     *          required=true
      *      )
      *     )
      */

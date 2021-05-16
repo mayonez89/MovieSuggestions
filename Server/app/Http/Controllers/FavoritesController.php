@@ -14,7 +14,7 @@ class FavoritesController extends Controller
 
     /**
      * @OA\Get(
-     *      path="api/users/{user}/favorites",
+     *      path="/api/users/{user}/favorites",
      *      operationId="getProjectsList",
      *      tags={"User Favorites"},
      *      summary="list of favorite contents belonging to a certain user",
@@ -22,7 +22,12 @@ class FavoritesController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
+     *       ),
+     *     @OA\Parameter(
+     *          name="user",
+     *          in="path",
+     *          required=true
+     *      )
      *     )
      */
     public function index(User $user)
@@ -37,7 +42,7 @@ class FavoritesController extends Controller
      * @OA\Post(
      *      path="/api/users/{user}/favorites",
      *      operationId="getProjectsList",
-     *      tags={"User favorites"},
+     *      tags={"User Favorites"},
      *      summary="Add Favorite",
      *      description="Adds the selected content to the list of the users' favorite contents.",
      *      @OA\Response(
@@ -47,6 +52,17 @@ class FavoritesController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="user",
+     *          in="path",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="favorite",
+     *          description="content to be added as favorite",
+     *          in="query",
+     *          required=true
      *      )
      *     )
      */
@@ -77,6 +93,17 @@ class FavoritesController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *     @OA\Parameter(
+     *          name="user",
+     *          in="path",
+     *          required=true
+     *      ),
+     *     @OA\Parameter(
+     *          name="favorite",
+     *          description="content to be removed as favorite",
+     *          in="path",
+     *          required=true
      *      )
      *     )
      */
