@@ -168,13 +168,13 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
-     *     ),
+     *       ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
      *          required=true
      *      )
+     *     )
      */
     public function show(Content $content)
     {
