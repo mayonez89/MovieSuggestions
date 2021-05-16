@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profiles\StoreRequest;
 use App\Http\Requests\Profiles\UpdateRequest;
 use App\Profile;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -43,5 +44,16 @@ class ProfileController extends Controller
         if ($this->checkUser()) {
             $profile->delete();
         }
+    }
+
+    public function updatePassword()
+    {
+        $param = "new-password";
+        $newPassword = request()->get($param);
+        if(empty($newPassword)) {
+            abort(400, "HTTP/1.1 400 Missing parameter: " . $param);
+        }
+
+        User::where('id', request()->get('user_id'))->update(['password' => $newPassword]);
     }
 }
