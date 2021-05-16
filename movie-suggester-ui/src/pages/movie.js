@@ -10,7 +10,6 @@ export default class Movie extends React.Component {
     constructor(props) {
         super(props); 
 
-        console.log(this.props.location.state)
         this.state = {
             movie : null,
             head: null,
@@ -35,8 +34,6 @@ export default class Movie extends React.Component {
 
       getMovie = () => {
         axios.get(this.props.location.state.movie, this.state.head).then((resp) => {
-          console.log("mov", resp.data.entities[0].links[0].href)
-          console.log("mov", resp.data)
 
           this.setState({movie : resp.data.properties})
           this.getGenre(resp.data.entities[0].links[0].href)
@@ -47,11 +44,8 @@ export default class Movie extends React.Component {
       }
 
       getGenre = (genre) => {
-        console.log('weget',genre, this.state.head)
         axios.get(genre, this.state.head).then((resp) => {
-          console.log("gen", resp.data.entities[0].properties.name) 
           this.setState({genre:resp.data.entities[0].properties.name })
-          // this.setState({genre : resp.data.properties})
         }).catch(e => {
           console.log('err in getting genre', e)
         }) 

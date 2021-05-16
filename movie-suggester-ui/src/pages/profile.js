@@ -25,7 +25,7 @@ export default class Profile extends React.Component {
          }
          }
        }, () => {
-        console.log("tijs", this.state) 
+        // console.log("tijs", this.state) 
 
        })
        
@@ -34,10 +34,12 @@ export default class Profile extends React.Component {
  
        updatePass = () => {
       
-        console.log('asw', this.state)
          axios.put(`${config.base_URL}/update-password/`, {'new-password': this.state.password}, this.state.head).then((resp) => {
  
-           console.log('prd',resp.data) 
+           if(resp.status == 200) {
+             alert("password changed")
+             this.setState({password: null})
+           }
          }).catch(e => {
            console.log('err in getting content', e)
            alert('something went wrong. Please try again')

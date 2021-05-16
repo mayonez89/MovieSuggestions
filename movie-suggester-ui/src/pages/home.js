@@ -38,10 +38,10 @@ export default class Home extends React.Component {
       }
 
       getAll = () => {
-        console.log('headdd', this.state.head)
+        // console.log('headdd', this.state.head)
         axios.get(`${config.base_URL}/contents`, this.state.head).then((resp) => {
 
-          console.log('we',resp.data)
+          // console.log('we',resp.data)
           this.setState({movies : resp.data.entities})
         }).catch(e => {
           console.log('err in getting content', e)

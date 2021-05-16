@@ -34,7 +34,6 @@ export default class Login extends React.Component {
         }
         axios.post(`${config.base_URL}/login`, params)
         .then((resp) => {
-          console.log('resp', resp)
           localStorage.setItem('hash', resp.data.hash)
           localStorage.setItem('id', resp.data.id)
           this.setState({isLoggedin: true})
@@ -50,14 +49,12 @@ export default class Login extends React.Component {
           alert('passwords do not match')
         
         } else {
-          console.log("sate", this.state)
           let  params = {
             email: this.state.signupEmail,
             password : this.state.signupPass
           }
           axios.post(`${config.base_URL}/register`, params)
           .then((resp) => {
-            console.log('resp', resp)
             localStorage.setItem('hash', resp.data.hash)
             localStorage.setItem('id', resp.data.id)
             this.setState({isLoggedin: true})
