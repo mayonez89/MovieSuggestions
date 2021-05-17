@@ -30,7 +30,6 @@ class LoginController extends Controller
      *          required=true
      *      )
      *     )
-     *     )
      */
     public function login()
     {
