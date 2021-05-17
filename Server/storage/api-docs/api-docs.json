@@ -71,9 +71,6 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
                     }
                 }
             }
