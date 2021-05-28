@@ -80,6 +80,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
+        request()->user = $profile->user()->first();
         if ($this->checkUser()) {
             $object = Profile::getSirenEntity($profile);
             $this->appendUserActions($object);
