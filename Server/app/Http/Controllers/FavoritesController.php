@@ -50,17 +50,25 @@ class FavoritesController extends Controller
      *      summary="Add Favorite",
      *      description="Adds the selected content to the list of the users' favorite contents.",
      *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
+     *       @OA\Response(
      *          response=404,
-     *          description="Not found"
-     *       ),
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="user",
      *          in="path",

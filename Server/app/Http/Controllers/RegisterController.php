@@ -13,17 +13,29 @@ class RegisterController extends Controller
      *      tags={"User actions"},
      *      summary="Register user",
      *      description="Register user",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *     @OA\Response(
+     *          response=201,
+     *          description="created"
      *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Both email and password must be defined./Invalid email format./Existing user, choose a different email.",
-     *      ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
      *      ),
      *     @OA\Parameter(
      *          name="email",

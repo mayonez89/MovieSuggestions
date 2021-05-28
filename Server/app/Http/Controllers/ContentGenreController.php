@@ -27,6 +27,10 @@ class ContentGenreController extends Controller
      *          response=404,
      *          description="Not found"
      *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -51,18 +55,22 @@ class ContentGenreController extends Controller
      *      tags={"Content Genres"},
      *      summary="Update list of genres for selected content. Takes list of IDs.",
      *      description="Update list of genres for selected content. Takes list of IDs.",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *       @OA\Response(
+     *          response=201,
+     *          description="created"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
+     *       @OA\Response(
      *          response=404,
-     *          description="Not found"
-     *       ),
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="content",
      *          in="path",

@@ -16,13 +16,29 @@ class ProfileController extends Controller
      *      tags={"Profile"},
      *      summary="Create profile",
      *      description="Creates a new profile",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *     @OA\Response(
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
      *      ),
      *     @OA\Parameter(
      *          name="name",
@@ -59,18 +75,18 @@ class ProfileController extends Controller
      *      tags={"Profile"},
      *      summary="Show profile",
      *      description="Get all info about a user profile",
-     *      @OA\Response(
+     *     @OA\Response(
      *          response=200,
      *          description="Successful operation"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
      *          response=404,
      *          description="Not found"
      *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
@@ -96,17 +112,29 @@ class ProfileController extends Controller
      *      summary="Update profile",
      *      description="Update the current users profile",
      *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
+     *       @OA\Response(
      *          response=404,
-     *          description="Not found"
-     *       ),
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
+     *      ),
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
@@ -144,18 +172,22 @@ class ProfileController extends Controller
      *      tags={"Profile"},
      *      summary="delete profile",
      *      description="soft delete the profile of a current user - the account will still continue to exist.",
-     *      @OA\Response(
+     *     @OA\Response(
      *          response=200,
      *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
      *      @OA\Response(
-     *          response=404,
-     *          description="Not found"
-     *       )
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     )
      */
     public function destroy(Profile $profile)
@@ -173,17 +205,29 @@ class ProfileController extends Controller
      *      tags={"User actions"},
      *      summary="change password",
      *      description="updates the password of the user logged in",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Missing parameter: new-password"
+     *       @OA\Response(
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
      *      ),
      *     @OA\Parameter(
      *          name="new-password",

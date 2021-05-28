@@ -31,6 +31,9 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             },
@@ -69,8 +72,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             }
@@ -96,6 +114,9 @@
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -139,14 +160,20 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -173,6 +200,9 @@
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             }
@@ -198,6 +228,9 @@
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -216,14 +249,17 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
+                    "201": {
+                        "description": "created"
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             }
@@ -273,14 +309,20 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             }
@@ -330,6 +372,12 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -348,14 +396,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             }
@@ -381,6 +438,9 @@
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -421,19 +481,23 @@
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
-                        "name": "email",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
                         "name": "password",
                         "in": "query",
                         "required": true
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             }
@@ -482,11 +546,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             }
@@ -510,11 +586,11 @@
                     "200": {
                         "description": "Successful operation"
                     },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
                     "404": {
                         "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -548,14 +624,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
                     },
                     "404": {
                         "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             },
@@ -570,11 +655,14 @@
                     "200": {
                         "description": "Successful operation"
                     },
+                    "404": {
+                        "description": "Not found"
+                    },
                     "401": {
                         "description": "Unauthenticated"
                     },
-                    "404": {
-                        "description": "Not found"
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             }
@@ -605,14 +693,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Missing parameter: new-password"
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             }
@@ -638,14 +735,23 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "400": {
-                        "description": "Both email and password must be defined./Invalid email format./Existing user, choose a different email."
+                    "201": {
+                        "description": "created"
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "data exists"
                     }
                 }
             }

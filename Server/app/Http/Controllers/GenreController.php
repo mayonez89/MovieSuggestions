@@ -21,10 +21,18 @@ class GenreController extends Controller
      *      tags={"Genres"},
      *      summary="complete list of all genres",
      *      description="Returns list of genres",
-     *      @OA\Response(
+     *         @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     )
      */
     public function index()
@@ -52,6 +60,10 @@ class GenreController extends Controller
      *          response=404,
      *          description="Not found"
      *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="genre",
      *          in="path",
@@ -73,18 +85,30 @@ class GenreController extends Controller
      *      tags={"Genres"},
      *      summary="add genre",
      *      description="add genre",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *       @OA\Response(
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
+     *       @OA\Response(
      *          response=404,
-     *          description="Not found"
-     *       ),
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
+     *      ),
      *     @OA\Parameter(
      *          name="name",
      *          in="query",

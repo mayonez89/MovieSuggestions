@@ -15,15 +15,22 @@ class LoginController extends Controller
      *      tags={"User actions"},
      *      summary="user login",
      *      description="Gets the user ID and the user hash based on email and password.",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *     @OA\Parameter(
-     *          name="email",
-     *          in="query",
-     *          required=true
+     *       @OA\Response(
+     *          response=201,
+     *          description="created"
+     *       ), 
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
      *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="password",
      *          in="query",

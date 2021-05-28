@@ -23,7 +23,11 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
-     *       )
+     *       ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
+     *      ),
      *     )
      */
     public function index()
@@ -50,9 +54,29 @@ class ContentController extends Controller
      *      summary="add content",
      *      description="add content",
      *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *          response=201,
+     *          description="created"
      *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
+     *      @OA\Response(
+     *          response=409,
+     *          description="data exists",
+     *      ),
      *     @OA\Parameter(
      *          name="title",
      *          in="query",
@@ -105,17 +129,25 @@ class ContentController extends Controller
      *      summary="edit content",
      *      description="edit content",
      *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
+     *          response=201,
+     *          description="created"
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
+     *       @OA\Response(
      *          response=404,
-     *          description="Not found"
-     *       ),
+     *          description="Not found",
+     *      ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -173,6 +205,10 @@ class ContentController extends Controller
      *          response=404,
      *          description="Not found"
      *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -211,6 +247,10 @@ class ContentController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ), 
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
