@@ -92,6 +92,7 @@
                     {
                         "name": "content",
                         "in": "path",
+                        "description": "slug of the content to be displayed",
                         "required": true
                     }
                 ],
@@ -118,6 +119,7 @@
                     {
                         "name": "content",
                         "in": "path",
+                        "description": "slug of the content to be updated",
                         "required": true
                     },
                     {
@@ -172,6 +174,7 @@
                     {
                         "name": "content",
                         "in": "path",
+                        "description": "slug of the content to be deleted",
                         "required": true
                     }
                 ],
@@ -200,6 +203,7 @@
                     {
                         "name": "content",
                         "in": "path",
+                        "description": "slug of the content",
                         "required": true
                     }
                 ],
@@ -226,6 +230,7 @@
                     {
                         "name": "content",
                         "in": "path",
+                        "description": "slug of the content",
                         "required": true
                     }
                 ],
@@ -257,6 +262,7 @@
                     {
                         "name": "user",
                         "in": "path",
+                        "description": "id of the user",
                         "required": true
                     }
                 ],
@@ -280,6 +286,7 @@
                     {
                         "name": "user",
                         "in": "path",
+                        "description": "id of the user",
                         "required": true
                     },
                     {
@@ -320,12 +327,13 @@
                     {
                         "name": "user",
                         "in": "path",
+                        "description": "id of the user",
                         "required": true
                     },
                     {
                         "name": "favorite",
                         "in": "path",
-                        "description": "content to be removed as favorite",
+                        "description": "slug of the content to be unfavorited",
                         "required": true
                     }
                 ],
@@ -404,6 +412,7 @@
                     {
                         "name": "genre",
                         "in": "path",
+                        "description": "id of the genre",
                         "required": true
                     }
                 ],
@@ -430,6 +439,7 @@
                     {
                         "name": "genre",
                         "in": "path",
+                        "description": "id of the genre",
                         "required": true
                     }
                 ],
@@ -531,10 +541,13 @@
                         "description": "Not found"
                     },
                     "400": {
-                        "description": "Bad Request"
+                        "description": "Bad request"
                     },
                     "405": {
                         "description": "Method not allowed"
+                    },
+                    "409": {
+                        "description": "Existing content"
                     }
                 }
             }
@@ -551,6 +564,7 @@
                     {
                         "name": "profile",
                         "in": "path",
+                        "description": "profile id",
                         "required": true
                     }
                 ],
@@ -577,6 +591,7 @@
                     {
                         "name": "profile",
                         "in": "path",
+                        "description": "profile id",
                         "required": true
                     },
                     {
@@ -610,9 +625,6 @@
                     },
                     "405": {
                         "description": "Method not allowed"
-                    },
-                    "409": {
-                        "description": "data exists"
                     }
                 }
             },
@@ -623,6 +635,14 @@
                 "summary": "delete profile",
                 "description": "soft delete the profile of a current user - the account will still continue to exist.",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "profile id",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -650,16 +670,6 @@
                 "parameters": [
                     {
                         "name": "new-password",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "name": "password",
                         "in": "query",
                         "required": true
                     }

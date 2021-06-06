@@ -34,7 +34,8 @@ class ContentGenreController extends Controller
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="slug of the content",
      *      )
      *     )
      */
@@ -74,7 +75,8 @@ class ContentGenreController extends Controller
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="slug of the content",
      *      )
      *     )
      */

@@ -31,11 +31,15 @@ class ProfileController extends Controller
      *      ),
      *       @OA\Response(
      *          response=400,
-     *          description="Bad Request",
+     *          description="Bad request",
      *      ),
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
+     *      ),
+     *     @OA\Response(
+     *          response=409,
+     *          description="Existing content",
      *      ),
      *     @OA\Parameter(
      *          name="name",
@@ -56,13 +60,15 @@ class ProfileController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $user_id = $request->get('user_id');
+        if(Profile::where('user_id', $user_id)->first()!==null) abort(409);
         $profile = Profile::updateOrCreate(
             ['user_id' => $request->get('user_id')],
             array_merge($request->only(['name', 'age', 'gender', 'country_id']),
                 ['deleted_at' => null,],
             ),
         );
-        return response()->noContent(Response::HTTP_CREATED);
+        return response()->json(['url' => route('profiles.show', $profile->id)], 201);
     }
 
     /**
@@ -87,7 +93,8 @@ class ProfileController extends Controller
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="profile id",
      *      )
      *     )
      */
@@ -128,14 +135,11 @@ class ProfileController extends Controller
      *          response=405,
      *          description="Method not allowed",
      *      ),
-     *      @OA\Response(
-     *          response=409,
-     *          description="data exists",
-     *      ),
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="profile id",
      *      ),
      *     @OA\Parameter(
      *          name="name",
@@ -185,6 +189,12 @@ class ProfileController extends Controller
      *          response=405,
      *          description="Method not allowed",
      *      ),
+     *     @OA\Parameter(
+     *          name="profile",
+     *          in="path",
+     *          required=true,
+     *          description="profile id",
+     *      ),
      *     )
      */
     public function destroy(Profile $profile)
@@ -192,6 +202,8 @@ class ProfileController extends Controller
         request()->user = $profile->user()->first();
         if ($this->checkUser()) {
             $profile->delete();
+        } else {
+            abort(403, "Access denied.");
         }
     }
 
@@ -231,16 +243,6 @@ class ProfileController extends Controller
      *          in="query",
      *          required=true
      *      ),
-     *     @OA\Parameter(
-     *          name="email",
-     *          in="query",
-     *          required=true
-     *      ),
-     *     @OA\Parameter(
-     *          name="password",
-     *          in="query",
-     *          required=true
-     *      )
      *     )
      */
     public function updatePassword()

@@ -113,7 +113,8 @@ class ContentController extends Controller
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="slug of the content to be updated",
      *      ),
      *     @OA\Parameter(
      *          name="title",
@@ -174,7 +175,8 @@ class ContentController extends Controller
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="slug of the content to be displayed",
      *      )
      *     )
      */
@@ -196,7 +198,7 @@ class ContentController extends Controller
      *      operationId="getProjectsList",
      *      tags={"Content"},
      *      summary="delete content",
-     *      description="delete content",
+     *          description="delete content",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
@@ -212,7 +214,8 @@ class ContentController extends Controller
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="slug of the content to be deleted"
      *      )
      *     )
      */

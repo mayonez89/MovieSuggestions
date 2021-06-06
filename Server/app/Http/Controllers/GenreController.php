@@ -63,7 +63,8 @@ class GenreController extends Controller
      *     @OA\Parameter(
      *          name="genre",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="id of the genre",
      *      )
      *     )
      */
@@ -135,7 +136,8 @@ class GenreController extends Controller
      *     @OA\Parameter(
      *          name="genre",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="id of the genre",
      *      )
      *     )
      */

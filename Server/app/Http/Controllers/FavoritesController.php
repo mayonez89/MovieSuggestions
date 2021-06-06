@@ -31,7 +31,8 @@ class FavoritesController extends Controller
      *     @OA\Parameter(
      *          name="user",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="id of the user",
      *      )
      *     )
      */
@@ -73,7 +74,8 @@ class FavoritesController extends Controller
      *     @OA\Parameter(
      *          name="user",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="id of the user",
      *      ),
      *     @OA\Parameter(
      *          name="favorite",
@@ -120,11 +122,12 @@ class FavoritesController extends Controller
      *     @OA\Parameter(
      *          name="user",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          description="id of the user",
      *      ),
      *     @OA\Parameter(
      *          name="favorite",
-     *          description="content to be removed as favorite",
+     *          description="slug of the content to be unfavorited",
      *          in="path",
      *          required=true
      *      )
