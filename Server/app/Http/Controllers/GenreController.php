@@ -26,13 +26,9 @@ class GenreController extends Controller
      *          description="Successful operation"
      *       ),
      *      @OA\Response(
-     *          response=404,
-     *          description="Not found"
-     *       ),
-     *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     )
      */
     public function index()
@@ -63,7 +59,7 @@ class GenreController extends Controller
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="genre",
      *          in="path",
@@ -89,17 +85,13 @@ class GenreController extends Controller
      *          response=201,
      *          description="created"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
      *      ),
      *       @OA\Response(
      *          response=404,
      *          description="Not found",
-     *      ),
-     *       @OA\Response(
-     *          response=400,
-     *          description="Bad Request",
      *      ),
      *     @OA\Response(
      *          response=405,
@@ -107,7 +99,7 @@ class GenreController extends Controller
      *      ),
      *      @OA\Response(
      *          response=409,
-     *          description="data exists",
+     *          description="Data exists",
      *      ),
      *     @OA\Parameter(
      *          name="name",
@@ -133,8 +125,8 @@ class GenreController extends Controller
      *          description="Successful operation"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *      @OA\Response(
      *          response=404,

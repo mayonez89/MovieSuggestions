@@ -17,14 +17,6 @@ class RegisterController extends Controller
      *          response=201,
      *          description="created"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *       @OA\Response(
-     *          response=404,
-     *          description="Not found",
-     *      ),
      *       @OA\Response(
      *          response=400,
      *          description="Bad Request",
@@ -62,7 +54,7 @@ class RegisterController extends Controller
         }
         $existingUser = User::where('email', $data['email'])->first();
         if ($existingUser) {
-            header("HTTP/1.1 400 Bad request");
+            header("HTTP/1.1 409 Existing data");
             exit("Existing user, choose a different email.");
         }
         $user = User::create($data);
@@ -71,6 +63,6 @@ class RegisterController extends Controller
         return response()->json([
             'id' => $user->id,
             'hash' => $hash,
-        ]);
+        ], 201);
     }
 }

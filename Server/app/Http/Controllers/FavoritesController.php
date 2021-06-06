@@ -6,6 +6,7 @@ use App\Content;
 use App\Http\Requests\Favorites\StoreFavoriteRequest;
 use App\SirenCollection;
 use App\User;
+use Illuminate\Http\Response;
 
 class FavoritesController extends Controller
 {
@@ -25,7 +26,7 @@ class FavoritesController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Not found"
+     *          description="User not found"
      *       ),
      *     @OA\Parameter(
      *          name="user",
@@ -53,22 +54,22 @@ class FavoritesController extends Controller
      *          response=201,
      *          description="created"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *       @OA\Response(
-     *          response=404,
-     *          description="Not found",
-     *      ),
      *       @OA\Response(
      *          response=400,
      *          description="Bad Request",
      *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Access denied",
+     *      ),
+     *       @OA\Response(
+     *          response=404,
+     *          description="User not found",
+     *      ),
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="user",
      *          in="path",
@@ -87,8 +88,10 @@ class FavoritesController extends Controller
         if ($this->checkUser()) {
 
             $favorite = $request->get('favorite');
-            if ($user->favorites()->find($favorite) === null)
+            if ($user->favorites()->find($favorite) === null) {
                 $user->favorites()->attach($favorite);
+                return response()->noContent(Response::HTTP_CREATED);
+            }
         } else {
             header("HTTP/1.1 401 Unauthorized");
             exit;
@@ -108,11 +111,11 @@ class FavoritesController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Not found"
+     *          description="User not found"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *     @OA\Parameter(
      *          name="user",

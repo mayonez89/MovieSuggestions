@@ -6,6 +6,7 @@ use App\Content;
 use App\Http\Requests\Content\StoreRequest;
 use App\SirenCollection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ContentController extends Controller
 {
@@ -24,10 +25,6 @@ class ContentController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       ),
-     *       @OA\Response(
-     *          response=404,
-     *          description="Not found",
-     *      ),
      *     )
      */
     public function index()
@@ -36,14 +33,6 @@ class ContentController extends Controller
         $collection = SirenCollection::getSirenCollection($contents, route(self::ROUTE_BASE . __FUNCTION__, [], false), Content::class);
         $this->appendUserActions($collection);
         return $collection->__toString();
-    }
-
-
-    public function create()
-    {
-        return response()->json([
-            'action' => __FUNCTION__,
-        ]);
     }
 
     /**
@@ -55,16 +44,8 @@ class ContentController extends Controller
      *      description="add content",
      *      @OA\Response(
      *          response=201,
-     *          description="created"
+     *          description="Created"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *       @OA\Response(
-     *          response=404,
-     *          description="Not found",
-     *      ),
      *       @OA\Response(
      *          response=400,
      *          description="Bad Request",
@@ -72,10 +53,6 @@ class ContentController extends Controller
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ),
-     *      @OA\Response(
-     *          response=409,
-     *          description="data exists",
      *      ),
      *     @OA\Parameter(
      *          name="title",
@@ -106,20 +83,9 @@ class ContentController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $content = Content::create($request->all());
-        $object = Content::getSirenEntity($content);
-        $this->appendUserActions($object);
-        return $object->__toString();
+        Content::create($request->all());
+        return response()->noContent(Response::HTTP_CREATED);
     }
-
-    public function edit(Content $content)
-    {
-        return response()->json([
-            'action' => __FUNCTION__,
-        ]);
-    }
-
-
 
     /**
      * @OA\Put(
@@ -129,25 +95,21 @@ class ContentController extends Controller
      *      summary="edit content",
      *      description="edit content",
      *      @OA\Response(
-     *          response=201,
-     *          description="created"
+     *          response=200,
+     *          description="Successful"
      *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *       @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
      *      ),
      *       @OA\Response(
      *          response=404,
      *          description="Not found",
      *      ),
-     *       @OA\Response(
-     *          response=400,
-     *          description="Bad Request",
-     *      ),
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -208,7 +170,7 @@ class ContentController extends Controller
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",
@@ -244,13 +206,9 @@ class ContentController extends Controller
      *          description="Not found"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="content",
      *          in="path",

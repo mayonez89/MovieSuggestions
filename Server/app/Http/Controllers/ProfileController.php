@@ -6,6 +6,7 @@ use App\Http\Requests\Profiles\StoreRequest;
 use App\Http\Requests\Profiles\UpdateRequest;
 use App\Profile;
 use App\User;
+use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
@@ -18,11 +19,11 @@ class ProfileController extends Controller
      *      description="Creates a new profile",
      *     @OA\Response(
      *          response=201,
-     *          description="created"
+     *          description="Created"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *       @OA\Response(
      *          response=404,
@@ -35,10 +36,6 @@ class ProfileController extends Controller
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ),
-     *      @OA\Response(
-     *          response=409,
-     *          description="data exists",
      *      ),
      *     @OA\Parameter(
      *          name="name",
@@ -65,7 +62,7 @@ class ProfileController extends Controller
                 ['deleted_at' => null,],
             ),
         );
-        return route('profiles.show', $profile->id);
+        return response()->noContent(Response::HTTP_CREATED);
     }
 
     /**
@@ -86,7 +83,7 @@ class ProfileController extends Controller
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="profile",
      *          in="path",
@@ -116,8 +113,8 @@ class ProfileController extends Controller
      *          description="created"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *       @OA\Response(
      *          response=404,
@@ -181,13 +178,13 @@ class ProfileController extends Controller
      *          description="Not found"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     )
      */
     public function destroy(Profile $profile)
@@ -210,8 +207,8 @@ class ProfileController extends Controller
      *          description="created"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
+     *          response=403,
+     *          description="Access denied",
      *      ),
      *       @OA\Response(
      *          response=404,

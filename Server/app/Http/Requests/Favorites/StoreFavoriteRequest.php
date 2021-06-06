@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Favorites;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomRequest;
 
-class StoreFavoriteRequest extends FormRequest
+class StoreFavoriteRequest extends CustomRequest
 {
     /**
      * Determine if the user is authorized to make this request.

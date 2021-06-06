@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Content\Genre;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Genre;
+use App\Http\Requests\CustomRequest;
 
-class CreateRequest extends FormRequest
+class CreateRequest extends CustomRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,12 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|unique|string",
+            "name" => ["required",
+                function($field, $value) {
+                    if(Genre::where($field, $value)->exists())
+                        abort(409, "Data exists");
+                },
+                "string"]
         ];
     }
 }

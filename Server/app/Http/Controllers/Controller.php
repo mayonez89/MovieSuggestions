@@ -20,9 +20,8 @@ class Controller extends BaseController
     }
     /**
      * @OA\Info(
-     *      version="1.0.1",
+     *      version="1.0.2",
      *      title="PWP - Movie Suggestions",
-     *      description="L5 Swagger OpenApi description",
      *      @OA\Contact(
      *          name=" the backend developer",
      *          email="aujhazi20@student.oulu.fi"
@@ -43,6 +42,9 @@ class Controller extends BaseController
      *     description="API Endpoints of Movie Suggestions"
      * )
      */
+
+
+//     *      url="http://18.196.196.249/",
 
     protected function checkUser(): bool
     {

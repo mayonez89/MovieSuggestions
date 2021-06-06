@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Content;
+namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
-use App\Http\Requests\CustomRequest;
-
-class UpdateRequest extends CustomRequest
+class CustomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,11 @@ class UpdateRequest extends CustomRequest
     public function rules()
     {
         return [
-            'title' => 'string',
-            'trailer_url' => 'string',
-            'description' => 'string',
-            'director' => 'string',
-            'release_date' => 'numeric',
+            //
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        abort(400, 'Bad request');
     }
 }

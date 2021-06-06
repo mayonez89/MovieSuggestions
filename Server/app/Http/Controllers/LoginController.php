@@ -16,21 +16,17 @@ class LoginController extends Controller
      *      summary="user login",
      *      description="Gets the user ID and the user hash based on email and password.",
      *       @OA\Response(
-     *          response=201,
-     *          description="created"
-     *       ), 
+     *          response=200,
+     *          description="Operation successful"
+     *       ),
      *       @OA\Response(
-     *          response=404,
-     *          description="Not found",
-     *      ),
-     *       @OA\Response(
-     *          response=400,
-     *          description="Bad Request",
+     *          response=401,
+     *          description="Unauthorized",
      *      ),
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ), 
+     *      ),
      *     @OA\Parameter(
      *          name="password",
      *          in="query",
@@ -41,6 +37,7 @@ class LoginController extends Controller
     public function login()
     {
         $user = User::where('email', request()->get('email'))->where('password', request()->get('password'))->first();
+        if(empty($user)) abort(401, "Unauthorized");
         $hash = md5(now());
         $user->update(['hash' => $hash]);
         return response()->json([
@@ -61,9 +58,13 @@ class LoginController extends Controller
      *          description="Successful operation"
      *       ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      )
+     *          response=403,
+     *          description="Access denied",
+     *      ),
+     *     @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
      * )
      */
     public function logout()
