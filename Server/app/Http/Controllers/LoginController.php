@@ -28,9 +28,16 @@ class LoginController extends Controller
      *          description="Method not allowed",
      *      ),
      *     @OA\Parameter(
+     *          name="email",
+     *          in="query",
+     *          required=true,
+     *          example="hadimir22@gmail.com",
+     *      ),
+     *     @OA\Parameter(
      *          name="password",
      *          in="query",
-     *          required=true
+     *          required=true,
+     *          example="password",
      *      )
      *     )
      */
@@ -57,13 +64,15 @@ class LoginController extends Controller
      *          response=200,
      *          description="Successful operation"
      *       ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Access denied",
-     *      ),
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
+     *      ),
+     *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
      *      ),
      * )
      */

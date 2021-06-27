@@ -14,7 +14,7 @@ class ProfileController extends Controller
      * @OA\Post(
      *      path="/api/profiles",
      *      operationId="getProjectsList",
-     *      tags={"Profile"},
+     *      tags={"Profile *"},
      *      summary="Create profile",
      *      description="Creates a new profile",
      *     @OA\Response(
@@ -42,18 +42,27 @@ class ProfileController extends Controller
      *          description="Existing content",
      *      ),
      *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
+     *      ),
+     *     @OA\Parameter(
      *          name="name",
      *          in="query",
+     *          example="Arnold",
      *          required=true
      *      ),
      *     @OA\Parameter(
      *          name="birth_date",
      *          in="query",
+     *          example="2020-01-27",
      *          required=false
      *      ),
      *     @OA\Parameter(
      *          name="gender",
      *          in="query",
+     *          example="male",
      *          required=false
      *      )
      *     )
@@ -64,7 +73,7 @@ class ProfileController extends Controller
         if(Profile::where('user_id', $user_id)->first()!==null) abort(409);
         $profile = Profile::updateOrCreate(
             ['user_id' => $request->get('user_id')],
-            array_merge($request->only(['name', 'age', 'gender', 'country_id']),
+            array_merge($request->only(['name', 'age', 'gender', 'country_id', 'birth_date']),
                 ['deleted_at' => null,],
             ),
         );
@@ -75,7 +84,7 @@ class ProfileController extends Controller
      * @OA\Get(
      *      path="/api/profiles/{profile}",
      *      operationId="getProjectsList",
-     *      tags={"Profile"},
+     *      tags={"Profile *"},
      *      summary="Show profile",
      *      description="Get all info about a user profile",
      *     @OA\Response(
@@ -89,6 +98,12 @@ class ProfileController extends Controller
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
+     *      ),
+     *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
      *      ),
      *     @OA\Parameter(
      *          name="profile",
@@ -112,7 +127,7 @@ class ProfileController extends Controller
      * @OA\Put(
      *      path="/api/profiles/{profile}",
      *      operationId="getProjectsList",
-     *      tags={"Profile"},
+     *      tags={"Profile *"},
      *      summary="Update profile",
      *      description="Update the current users profile",
      *      @OA\Response(
@@ -136,6 +151,12 @@ class ProfileController extends Controller
      *          description="Method not allowed",
      *      ),
      *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
+     *      ),
+     *     @OA\Parameter(
      *          name="profile",
      *          in="path",
      *          required=true,
@@ -144,16 +165,22 @@ class ProfileController extends Controller
      *     @OA\Parameter(
      *          name="name",
      *          in="query",
+     *          example="Arnold2",
      *          required=false
      *      ),
      *     @OA\Parameter(
      *          name="birth_date",
      *          in="query",
-     *          required=false
+     *          example="2019-03-21",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="date"
+     *          )
      *      ),
      *     @OA\Parameter(
      *          name="gender",
      *          in="query",
+     *          example="female",
      *          required=false
      *      )
      *     )
@@ -170,7 +197,7 @@ class ProfileController extends Controller
      * @OA\Delete(
      *      path="/api/profiles/{profile}",
      *      operationId="getProjectsList",
-     *      tags={"Profile"},
+     *      tags={"Profile *"},
      *      summary="delete profile",
      *      description="soft delete the profile of a current user - the account will still continue to exist.",
      *     @OA\Response(
@@ -188,6 +215,12 @@ class ProfileController extends Controller
      *      @OA\Response(
      *          response=405,
      *          description="Method not allowed",
+     *      ),
+     *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
      *      ),
      *     @OA\Parameter(
      *          name="profile",
@@ -208,15 +241,15 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *      path="/api/update-password",
      *      operationId="getProjectsList",
      *      tags={"User actions"},
      *      summary="change password",
      *      description="updates the password of the user logged in",
      *       @OA\Response(
-     *          response=201,
-     *          description="created"
+     *          response=200,
+     *          description="Updated"
      *       ),
      *      @OA\Response(
      *          response=403,
@@ -233,15 +266,18 @@ class ProfileController extends Controller
      *     @OA\Response(
      *          response=405,
      *          description="Method not allowed",
-     *      ),
-     *      @OA\Response(
-     *          response=409,
-     *          description="data exists",
-     *      ),
+         *      ),
+         *     @OA\Parameter(
+         *          name="hash",
+         *          in="header",
+         *          required=true,
+         *          description="code received during registration/login",
+         *      ),
      *     @OA\Parameter(
      *          name="new-password",
      *          in="query",
-     *          required=true
+     *          required=true,
+     *          description="new password * requires hash code of a profile in the header"
      *      ),
      *     )
      */

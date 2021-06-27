@@ -36,6 +36,7 @@ class ContentGenreController extends Controller
      *          in="path",
      *          required=true,
      *          description="slug of the content",
+     *          example="infinity-war",
      *      )
      *     )
      */
@@ -77,7 +78,23 @@ class ContentGenreController extends Controller
      *          in="path",
      *          required=true,
      *          description="slug of the content",
-     *      )
+     *          example="infinity-war",
+     *      ),
+     *     @OA\Parameter(
+     *          name="ids[]",
+     *          in="query",
+     *          required=true,
+     *          description="slug of the content",
+     *         schema=@OA\Schema(
+     *              schema="Genre IDs",
+     *              description="an array of integers (for now used only to update genres of a specific content)",
+     *             type="array",
+     *              @OA\Items(
+     *                  type="integer",
+     *                  example=2,
+     *              ),
+     *         ),
+     *      ),
      *     )
      */
     public function update(Content $content, UpdateRequest $request)

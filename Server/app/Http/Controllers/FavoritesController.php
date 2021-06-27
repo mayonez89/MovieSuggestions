@@ -17,7 +17,7 @@ class FavoritesController extends Controller
      * @OA\Get(
      *      path="/api/users/{user}/favorites",
      *      operationId="getProjectsList",
-     *      tags={"User Favorites"},
+     *      tags={"User Favorites *"},
      *      summary="list of favorite contents belonging to a certain user",
      *      description="Returns list of favorite contents belonging to a certain user",
      *      @OA\Response(
@@ -33,6 +33,7 @@ class FavoritesController extends Controller
      *          in="path",
      *          required=true,
      *          description="id of the user",
+     *          example=1,
      *      )
      *     )
      */
@@ -48,7 +49,7 @@ class FavoritesController extends Controller
      * @OA\Post(
      *      path="/api/users/{user}/favorites",
      *      operationId="getProjectsList",
-     *      tags={"User Favorites"},
+     *      tags={"User Favorites *"},
      *      summary="Add Favorite",
      *      description="Adds the selected content to the list of the users' favorite contents.",
      *      @OA\Response(
@@ -72,16 +73,24 @@ class FavoritesController extends Controller
      *          description="Method not allowed",
      *      ),
      *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
+     *      ),
+     *     @OA\Parameter(
      *          name="user",
      *          in="path",
      *          required=true,
      *          description="id of the user",
+     *          example=1,
      *      ),
      *     @OA\Parameter(
      *          name="favorite",
      *          description="content to be added as favorite",
      *          in="query",
-     *          required=true
+     *          required=true,
+     *          example="infinity-war",
      *      )
      *     )
      */
@@ -92,8 +101,10 @@ class FavoritesController extends Controller
             $favorite = $request->get('favorite');
             if ($user->favorites()->find($favorite) === null) {
                 $user->favorites()->attach($favorite);
-                return response()->noContent(Response::HTTP_CREATED);
             }
+            return response()->json([
+                'url' => route('users.favorites.index', $user)
+            ], 201);
         } else {
             header("HTTP/1.1 401 Unauthorized");
             exit;
@@ -104,7 +115,7 @@ class FavoritesController extends Controller
      * @OA\Delete(
      *      path="/api/users/{user}/favorites/{favorite}",
      *      operationId="getProjectsList",
-     *      tags={"User Favorite"},
+     *      tags={"User Favorite *"},
      *      summary="Remove favorite",
      *      description="From the list of a users favorite contents, remove the selected one.",
      *      @OA\Response(
@@ -120,16 +131,24 @@ class FavoritesController extends Controller
      *          description="Access denied",
      *      ),
      *     @OA\Parameter(
+     *          name="hash",
+     *          in="header",
+     *          required=true,
+     *          description="code received during registration/login",
+     *      ),
+     *     @OA\Parameter(
      *          name="user",
      *          in="path",
      *          required=true,
      *          description="id of the user",
+     *          example=1,
      *      ),
      *     @OA\Parameter(
      *          name="favorite",
      *          description="slug of the content to be unfavorited",
      *          in="path",
-     *          required=true
+     *          required=true,
+     *          example="infinity-war",
      *      )
      *     )
      */

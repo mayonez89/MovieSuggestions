@@ -20,11 +20,15 @@ class ContentController extends Controller
      *      operationId="getProjectsList",
      *      tags={"Contents"},
      *      summary="get the complete list of content available",
-     *      description="Returns list of movies",
+     *      description="Returns the list of all movies",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
      *       ),
+     *      @OA\Response(
+     *          response=405,
+     *          description="Method not allowed",
+     *      ),
      *     )
      */
     public function index()
@@ -41,7 +45,8 @@ class ContentController extends Controller
      *      operationId="getProjectsList",
      *      tags={"Contents"},
      *      summary="add content",
-     *      description="add content",
+     *      description="Add new content(movie). None of the shown parameters are unique, the ID is the slug, created from the title.
+     *          If the same title appears twice, the next slug will just add numeration to the end of the slug.",
      *      @OA\Response(
      *          response=201,
      *          description="Created"
@@ -57,34 +62,40 @@ class ContentController extends Controller
      *     @OA\Parameter(
      *          name="title",
      *          in="query",
+     *          example="Terminator",
      *          required=true
      *      ),
      *     @OA\Parameter(
      *          name="trailer_url",
      *          in="query",
+     *          example="https://www.youtube.com/watch?v=k64P4l2Wmeg",
      *          required=false
      *      ),
      *     @OA\Parameter(
      *          name="description",
      *          in="query",
+     *          example="A human-looking indestructible cyborg is sent from 2029 to 1984 to assassinate a waitress...",
      *          required=false
      *      ),
      *     @OA\Parameter(
      *          name="director",
      *          in="query",
+     *          example="James Cameron",
      *          required=false
      *      ),
      *     @OA\Parameter(
      *          name="release_date",
      *          in="query",
+     *          example="1984",
      *          required=false
      *      )
      *     )
      */
     public function store(StoreRequest $request)
     {
-        Content::create($request->all());
-        return response()->noContent(Response::HTTP_CREATED);
+        return response()->json([
+            'url' => route('contents.show', Content::create($request->all()))
+        ], 201);
     }
 
     /**
@@ -115,31 +126,37 @@ class ContentController extends Controller
      *          in="path",
      *          required=true,
      *          description="slug of the content to be updated",
+     *          example="infinity-war",
      *      ),
      *     @OA\Parameter(
      *          name="title",
      *          in="query",
-     *          required=false
+     *          required=false,
+     *          example="Infinity war 2",
      *      ),
      *     @OA\Parameter(
      *          name="trailer_url",
      *          in="query",
-     *          required=false
+     *          required=false,
+ *              example="https://www.youtube.com/watch?v=jz9AB7cXC8E&ab_channel=ISMO",
      *      ),
      *     @OA\Parameter(
      *          name="description",
      *          in="query",
-     *          required=false
+     *          required=false,
+     *          example="New release",
      *      ),
      *     @OA\Parameter(
      *          name="director",
      *          in="query",
-     *          required=false
+     *          required=false,
+     *          example="James Cameron",
      *      ),
      *     @OA\Parameter(
      *          name="release_date",
      *          in="query",
-     *          required=false
+     *          required=false,
+     *          example="2021"
      *      )
      *     )
      */
@@ -176,6 +193,7 @@ class ContentController extends Controller
      *          name="content",
      *          in="path",
      *          required=true,
+     *          example="infinity-war",
      *          description="slug of the content to be displayed",
      *      )
      *     )
@@ -215,6 +233,7 @@ class ContentController extends Controller
      *          name="content",
      *          in="path",
      *          required=true,
+     *          example="12-angry-men",
      *          description="slug of the content to be deleted"
      *      )
      *     )

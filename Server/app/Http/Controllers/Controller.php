@@ -29,7 +29,11 @@ class Controller extends BaseController
      *      @OA\License(
      *          name="Contact the frontend developer",
      *          url="mailto:hadi.mir@student.oulu.fi"
-     *      )
+     *      ),
+     *     description="For 'User Favorite(s)' and 'Profile' sections, a user login is required.
+     *          Take the code received as 'hash' received after a login or registration,
+     *          and place it into the corresponding header fields.",
+     *
      * )
      *
      * @OA\Server(
@@ -45,6 +49,7 @@ class Controller extends BaseController
 
 
 //     *      url="http://18.196.196.249/",
+//      *      url="http://127.0.0.1:8000/",
 
     protected function checkUser(): bool
     {

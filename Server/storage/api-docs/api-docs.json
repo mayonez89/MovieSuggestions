@@ -2,6 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "PWP - Movie Suggestions",
+        "description": "For 'User Favorite(s)' and 'Profile' sections, a user login is required.\n     *          Take the code received as 'hash' received after a login or registration,\n     *          and place it into the corresponding header fields.",
         "contact": {
             "name": " the backend developer",
             "email": "aujhazi20@student.oulu.fi"
@@ -25,11 +26,14 @@
                     "Contents"
                 ],
                 "summary": "get the complete list of content available",
-                "description": "Returns list of movies",
+                "description": "Returns the list of all movies",
                 "operationId": "getProjectsList",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
+                    },
+                    "405": {
+                        "description": "Method not allowed"
                     }
                 }
             },
@@ -38,33 +42,38 @@
                     "Contents"
                 ],
                 "summary": "add content",
-                "description": "add content",
+                "description": "Add new content(movie). None of the shown parameters are unique, the ID is the slug, created from the title.\n     *          If the same title appears twice, the next slug will just add numeration to the end of the slug.",
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
                         "name": "title",
                         "in": "query",
-                        "required": true
+                        "required": true,
+                        "example": "Terminator"
                     },
                     {
                         "name": "trailer_url",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "https://www.youtube.com/watch?v=k64P4l2Wmeg"
                     },
                     {
                         "name": "description",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "A human-looking indestructible cyborg is sent from 2029 to 1984 to assassinate a waitress..."
                     },
                     {
                         "name": "director",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "James Cameron"
                     },
                     {
                         "name": "release_date",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "1984"
                     }
                 ],
                 "responses": {
@@ -93,7 +102,8 @@
                         "name": "content",
                         "in": "path",
                         "description": "slug of the content to be displayed",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
                     }
                 ],
                 "responses": {
@@ -120,32 +130,38 @@
                         "name": "content",
                         "in": "path",
                         "description": "slug of the content to be updated",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
                     },
                     {
                         "name": "title",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "Infinity war 2"
                     },
                     {
                         "name": "trailer_url",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "https://www.youtube.com/watch?v=jz9AB7cXC8E&ab_channel=ISMO"
                     },
                     {
                         "name": "description",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "New release"
                     },
                     {
                         "name": "director",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "James Cameron"
                     },
                     {
                         "name": "release_date",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "2021"
                     }
                 ],
                 "responses": {
@@ -175,7 +191,8 @@
                         "name": "content",
                         "in": "path",
                         "description": "slug of the content to be deleted",
-                        "required": true
+                        "required": true,
+                        "example": "12-angry-men"
                     }
                 ],
                 "responses": {
@@ -204,7 +221,8 @@
                         "name": "content",
                         "in": "path",
                         "description": "slug of the content",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
                     }
                 ],
                 "responses": {
@@ -231,7 +249,23 @@
                         "name": "content",
                         "in": "path",
                         "description": "slug of the content",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
+                    },
+                    {
+                        "name": "ids[]",
+                        "in": "query",
+                        "description": "slug of the content",
+                        "required": true,
+                        "schema": {
+                            "schema": "Genre IDs",
+                            "description": "an array of integers (for now used only to update genres of a specific content)",
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "example": 2
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -253,7 +287,7 @@
         "/api/users/{user}/favorites": {
             "get": {
                 "tags": [
-                    "User Favorites"
+                    "User Favorites *"
                 ],
                 "summary": "list of favorite contents belonging to a certain user",
                 "description": "Returns list of favorite contents belonging to a certain user",
@@ -263,7 +297,8 @@
                         "name": "user",
                         "in": "path",
                         "description": "id of the user",
-                        "required": true
+                        "required": true,
+                        "example": 1
                     }
                 ],
                 "responses": {
@@ -277,23 +312,31 @@
             },
             "post": {
                 "tags": [
-                    "User Favorites"
+                    "User Favorites *"
                 ],
                 "summary": "Add Favorite",
                 "description": "Adds the selected content to the list of the users' favorite contents.",
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
+                    {
                         "name": "user",
                         "in": "path",
                         "description": "id of the user",
-                        "required": true
+                        "required": true,
+                        "example": 1
                     },
                     {
                         "name": "favorite",
                         "in": "query",
                         "description": "content to be added as favorite",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
                     }
                 ],
                 "responses": {
@@ -318,23 +361,31 @@
         "/api/users/{user}/favorites/{favorite}": {
             "delete": {
                 "tags": [
-                    "User Favorite"
+                    "User Favorite *"
                 ],
                 "summary": "Remove favorite",
                 "description": "From the list of a users favorite contents, remove the selected one.",
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
+                    {
                         "name": "user",
                         "in": "path",
                         "description": "id of the user",
-                        "required": true
+                        "required": true,
+                        "example": 1
                     },
                     {
                         "name": "favorite",
                         "in": "path",
                         "description": "slug of the content to be unfavorited",
-                        "required": true
+                        "required": true,
+                        "example": "infinity-war"
                     }
                 ],
                 "responses": {
@@ -378,7 +429,8 @@
                     {
                         "name": "name",
                         "in": "query",
-                        "required": true
+                        "required": true,
+                        "example": "sci-fi"
                     }
                 ],
                 "responses": {
@@ -413,7 +465,8 @@
                         "name": "genre",
                         "in": "path",
                         "description": "id of the genre",
-                        "required": true
+                        "required": true,
+                        "example": 1
                     }
                 ],
                 "responses": {
@@ -440,7 +493,8 @@
                         "name": "genre",
                         "in": "path",
                         "description": "id of the genre",
-                        "required": true
+                        "required": true,
+                        "example": 1
                     }
                 ],
                 "responses": {
@@ -466,9 +520,16 @@
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "example": "hadimir22@gmail.com"
+                    },
+                    {
                         "name": "password",
                         "in": "query",
-                        "required": true
+                        "required": true,
+                        "example": "password"
                     }
                 ],
                 "responses": {
@@ -492,12 +553,17 @@
                 "summary": "user logout",
                 "description": "remove the hash used for the users authentication",
                 "operationId": "getProjectsList",
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
-                    },
-                    "403": {
-                        "description": "Access denied"
                     },
                     "405": {
                         "description": "Method not allowed"
@@ -508,26 +574,35 @@
         "/api/profiles": {
             "post": {
                 "tags": [
-                    "Profile"
+                    "Profile *"
                 ],
                 "summary": "Create profile",
                 "description": "Creates a new profile",
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
+                    {
                         "name": "name",
                         "in": "query",
-                        "required": true
+                        "required": true,
+                        "example": "Arnold"
                     },
                     {
                         "name": "birth_date",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "2020-01-27"
                     },
                     {
                         "name": "gender",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "male"
                     }
                 ],
                 "responses": {
@@ -555,12 +630,18 @@
         "/api/profiles/{profile}": {
             "get": {
                 "tags": [
-                    "Profile"
+                    "Profile *"
                 ],
                 "summary": "Show profile",
                 "description": "Get all info about a user profile",
                 "operationId": "getProjectsList",
                 "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
                     {
                         "name": "profile",
                         "in": "path",
@@ -582,12 +663,18 @@
             },
             "put": {
                 "tags": [
-                    "Profile"
+                    "Profile *"
                 ],
                 "summary": "Update profile",
                 "description": "Update the current users profile",
                 "operationId": "getProjectsList",
                 "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
                     {
                         "name": "profile",
                         "in": "path",
@@ -597,17 +684,23 @@
                     {
                         "name": "name",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "Arnold2"
                     },
                     {
                         "name": "birth_date",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        },
+                        "example": "2019-03-21"
                     },
                     {
                         "name": "gender",
                         "in": "query",
-                        "required": false
+                        "required": false,
+                        "example": "female"
                     }
                 ],
                 "responses": {
@@ -630,12 +723,18 @@
             },
             "delete": {
                 "tags": [
-                    "Profile"
+                    "Profile *"
                 ],
                 "summary": "delete profile",
                 "description": "soft delete the profile of a current user - the account will still continue to exist.",
                 "operationId": "getProjectsList",
                 "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
                     {
                         "name": "profile",
                         "in": "path",
@@ -660,7 +759,7 @@
             }
         },
         "/api/update-password": {
-            "post": {
+            "put": {
                 "tags": [
                     "User actions"
                 ],
@@ -669,14 +768,21 @@
                 "operationId": "getProjectsList",
                 "parameters": [
                     {
+                        "name": "hash",
+                        "in": "header",
+                        "description": "code received during registration/login",
+                        "required": true
+                    },
+                    {
                         "name": "new-password",
                         "in": "query",
+                        "description": "new password * requires hash code of a profile in the header",
                         "required": true
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "created"
+                    "200": {
+                        "description": "Updated"
                     },
                     "403": {
                         "description": "Access denied"
@@ -689,9 +795,6 @@
                     },
                     "405": {
                         "description": "Method not allowed"
-                    },
-                    "409": {
-                        "description": "data exists"
                     }
                 }
             }
@@ -794,6 +897,14 @@
                 "type": "object",
                 "xml": {
                     "name": "Genre"
+                }
+            },
+            "Genre IDs": {
+                "description": "an array of integers (for now used only to update genres of a specific content)",
+                "type": "array",
+                "items": {
+                    "type": "integer",
+                    "example": 2
                 }
             },
             "Profile": {
